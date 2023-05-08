@@ -4,24 +4,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Template</title>
+<title>Balance | Page</title>
+<link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-	<jsp:useBean id="loginInfo" type="com.jdc.balance.security.LoginUser"
+	<jsp:useBean id="loginInfo" class="com.jdc.balance.security.LoginUser"
 		scope="session" />
-	<jsp:useBean id="content" type="java.lang.String" scope="request" />
+	<jsp:useBean id="content" class="java.lang.String" scope="request" />
 	<%
 	if (loginInfo.isLogin()) {
 	%>
 	<!-- Employee Template -->
 	<header>
-		<h1 class="brand-logo">
-			Balance
-		</h1>
-		
-		<nav>
-		
-		</nav>
+		<h1 class="brand-logo">Balance</h1>
+
+		<nav></nav>
 	</header>
 	<aside>
 		<!-- User Profile -->
@@ -32,8 +29,11 @@
 	<%
 	} else {
 	%>
-	<!-- Anonymous Template -->
-	<jsp:include page="<%=content%>"></jsp:include>
+	<main class="anonymous">
+		<!-- Anonymous Template -->
+		<jsp:include page="<%=content%>"></jsp:include>
+	</main>
+
 	<%
 	}
 	%>

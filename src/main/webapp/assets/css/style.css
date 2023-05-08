@@ -1,0 +1,78 @@
+@charset "ISO-8859-1";
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	font-family: sans-serif;
+}
+
+.card-bg {
+	background: url(../images/img_login_bg.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 50%;
+	height: 107%;
+}
+
+.anonymous {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.card {
+	width: 50%;
+	height: 100%;
+	padding: 1rem 2rem 2rem 2rem;
+	background-color: #E3DB96;
+	box-shadow: 7px 7px 7px 1px #B2BB91;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.card-form {
+	display: flex;
+	flex-direction: column;
+	color: #fff;
+}
+
+.card-title {
+	color: #897F25;
+	font-size: 30px;
+	margin-bottom: 46px;
+}
+
+.card-form>input {
+	margin: 4px 0 50px 0;
+	background-color: transparent;
+	color: #897F25;
+	padding: 0.4rem;
+	border-style: none;
+	border-bottom: 1px solid #fff;
+}
+
+.card-form>input:focus {
+	outline: none;
+}
+
+.card-form>::placeholder {
+	color: #897F25;
+}
+
+.card-form>button {
+	border: none;
+	padding: 18px;
+	cursor: pointer;
+	color: #897F25;
+}
+
+.card-form>button:hover {
+	background-color: #EDE8BB;
+}
+
+.card-inner {
+	width: 400px;
+}
