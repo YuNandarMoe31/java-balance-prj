@@ -9,6 +9,10 @@
 String styleCss = application.getContextPath().concat("/assets/css/style.css");
 %>
 <link rel="stylesheet" href="<%=styleCss %>" />
+<%
+String styleResetCss = application.getContextPath().concat("/assets/css/reset.css");
+%>
+<link rel="stylesheet" href="<%=styleResetCss %>" />
 </head>
 <body>
 	<jsp:useBean id="loginInfo" class="com.jdc.balance.security.LoginUser"
@@ -18,15 +22,26 @@ String styleCss = application.getContextPath().concat("/assets/css/style.css");
 	if (loginInfo.isLogin()) {
 	%>
 	<!-- Employee Template -->
-	<header>
-		<h1 class="brand-logo">Balance</h1>
+	<header class="container">
+		<h1 class="brand-logo">
+			<img src="../assets/images/img_logo.png" alt="Balance Management">
+		</h1>
 
-		<nav></nav>
+		<nav>
+			<a href="#">Employee</a>
+			<a href="#">Balance Report</a>
+			<a href="#">Transactions</a>
+			<a href="#">Logout</a>
+		</nav>
 	</header>
 
 	<main class="employee">
 		<aside>
-			<!-- User Profile -->
+			<!-- Profile Image -->
+
+			<!-- User Information -->
+
+			<!-- User Menu -->
 		</aside>
 		<jsp:include page="<%=content%>"></jsp:include>
 	</main>

@@ -16,9 +16,30 @@ body {
 }
 
 header {
-	background-color: teal;
-	min-height: 60px;
-	height: 60px;
+	background-color: #D1C553;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.container {
+	padding: 0 20px;
+}
+
+.brand-logo {
+	color: #fff;
+}
+
+.brand-logo>img {
+	width: 150px;
+}
+
+header>nav a {
+	padding: 0 10px;
+}
+
+header>nav a:hover {
+	color: #EDE8BB;
 }
 
 .employee {
@@ -87,4 +108,3 @@ header {
 .card-inner {
 	width: 400px;
 }
-
