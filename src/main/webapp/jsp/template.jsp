@@ -5,14 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Balance | Page</title>
-<%
-String styleCss = application.getContextPath().concat("/assets/css/style.css");
-%>
-<link rel="stylesheet" href="<%=styleCss %>" />
-<%
-String styleResetCss = application.getContextPath().concat("/assets/css/reset.css");
-%>
-<link rel="stylesheet" href="<%=styleResetCss %>" />
+<link rel="stylesheet" href="<%=getPath("/assets/css/style.css")%>" />
+<link rel="stylesheet" href="<%=getPath("/assets/css/reset.css")%>" />
 </head>
 <body>
 	<jsp:useBean id="loginInfo" class="com.jdc.balance.security.LoginUser"
@@ -24,14 +18,13 @@ String styleResetCss = application.getContextPath().concat("/assets/css/reset.cs
 	<!-- Employee Template -->
 	<header class="container">
 		<h1 class="brand-logo">
-			<img src="../assets/images/img_logo.png" alt="Balance Management">
+			<img src="<%=getPath("/assets/images/img_logo.png")%>"
+				alt="Balance Management">
 		</h1>
 
 		<nav>
-			<a href="#">Employee</a>
-			<a href="#">Balance Report</a>
-			<a href="#">Transactions</a>
-			<a href="#">Logout</a>
+			<a href="#">Employee</a> <a href="#">Balance Report</a> <a href="#">Transactions</a>
+			<a href="<%=getPath("/logout")%>">Logout</a>
 		</nav>
 	</header>
 
@@ -56,8 +49,11 @@ String styleResetCss = application.getContextPath().concat("/assets/css/reset.cs
 	<%
 	}
 	%>
-
-
+	
+	<!-- To Get Absolute Path -->
+	<%!String getPath(String path) {
+		return getServletContext().getContextPath().concat(path);
+	}%>
 
 </body>
 </html>

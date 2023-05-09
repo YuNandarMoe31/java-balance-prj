@@ -44,4 +44,8 @@ public abstract class BaseController extends HttpServlet {
 		}
 		return loginInfo;
 	}
+	
+	protected void logout(HttpServletRequest req) {
+		getLoginInfo(req).setLogin(false);
+	}
 }
