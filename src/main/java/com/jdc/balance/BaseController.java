@@ -2,6 +2,8 @@ package com.jdc.balance;
 
 import java.io.IOException;
 
+import com.jdc.balance.security.LoginUser;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,5 +33,15 @@ public abstract class BaseController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		process(req, resp, req.getServletPath());
+	}
+	
+	protected LoginUser getLoginInfo(HttpServletRequest req) {
+		LoginUser loginInfo = (LoginUser) req.getSession(true).getAttribute("loginInfo");
+		
+		if(null == loginInfo) {
+			loginInfo = new LoginUser();
+			req.getSession().setAttribute("loginInfo", loginInfo);
+		}
+		return loginInfo;
 	}
 }

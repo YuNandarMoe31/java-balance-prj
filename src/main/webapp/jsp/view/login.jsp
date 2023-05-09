@@ -4,14 +4,14 @@
 <section class="card">
 	<div class="card-inner">
 		<h3 class="card-title">Member Login</h3>
-		<form class="card-form" action="#">
+		<form action="login" method="post" class="card-form">
 			<!-- Email Address -->
-			<label>Email</label> <input type="email"
-				placeholder="Enter Email Address" required>
+			<label>Email</label> 
+			<input type="email" placeholder="Enter Email Address" required>
 
 			<!-- Password -->
-			<label>Password</label> <input type="password"
-				placeholder="Enter Password" required>
+			<label>Password</label> 
+			<input type="password" placeholder="Enter Password" required>
 
 			<!-- Login Button -->
 			<button type="submit">Login</button>

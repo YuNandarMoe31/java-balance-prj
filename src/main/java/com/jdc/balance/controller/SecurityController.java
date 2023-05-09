@@ -28,6 +28,10 @@ public class SecurityController extends BaseController {
 	private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		if(isLoginAction(req)) {
 			// TODO Login Action
+			var loginInfo = getLoginInfo(req);
+			
+			loginInfo.setLogin(true);
+			
 			redirect(resp, "/employee/home");
 		} else {
 			navigate(req, resp, "login");
