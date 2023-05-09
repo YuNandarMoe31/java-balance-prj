@@ -36,4 +36,19 @@ public class EmployeeController extends BaseController {
 		// TODO implement here
 	}
 
+	@Override
+	protected String getPageTitle() {
+		return "Employees";
+	}
+
+	@Override
+	protected String getViewTitle() {
+		return "Employee Management";
+	}
+
+	@Override
+	protected String getActiveMenu() {
+		return "employees";
+	}
+
 }

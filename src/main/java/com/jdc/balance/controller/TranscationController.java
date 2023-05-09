@@ -26,7 +26,6 @@ public class TranscationController extends BaseController {
 		case "/employee/transaction/save" -> save(req, resp);
 		case "/manager/transaction/approve" -> approve(req, resp);
 		}
-
 	}
 
 	private void search(HttpServletRequest req, HttpServletResponse resp) {

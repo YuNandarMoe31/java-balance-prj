@@ -160,6 +160,7 @@ header>nav a:hover {
     background-color: #fff;
     display: block;
     margin: 10px;
+    border-radius: 5px;
 }
 
 .user-actions > a:hover {

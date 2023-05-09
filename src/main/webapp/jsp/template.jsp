@@ -25,8 +25,10 @@
 			</h1>
 
 			<nav>
+				<a href="#">Home</a>
+				<a href="#">Incomes</a>
+				<a href="#">Expenses</a>
 				<a href="#">Balance Report</a> 
-				<a href="#">Transactions</a>
 				<a href="#">Employee</a> 
 				<a href="<%=getPath("/logout")%>">Logout</a>
 			</nav>
@@ -40,6 +42,7 @@
 					<li class="user-name">Mg Mg</li>
 					<li class="user-role">Manager</li>
 					<li class="user-actions">
+						<a href="#">Upload Photo</a>
 						<a href="#">Edit Profile</a>
 						<a href="#">Change Password</a>
 					</li>

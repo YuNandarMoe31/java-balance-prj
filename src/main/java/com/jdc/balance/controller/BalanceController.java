@@ -22,4 +22,19 @@ public class BalanceController extends BaseController {
 		// TODO implement here
 	}
 
+	@Override
+	protected String getPageTitle() {
+		return "Report";
+	}
+
+	@Override
+	protected String getViewTitle() {
+		return "Balance Report";
+	}
+
+	@Override
+	protected String getActiveMenu() {
+		return "report";
+	}
+
 }

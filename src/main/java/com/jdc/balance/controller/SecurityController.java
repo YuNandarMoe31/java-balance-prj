@@ -44,4 +44,19 @@ public class SecurityController extends BaseController {
 	private boolean isLoginAction(HttpServletRequest req) {
 		return "POST".equals(req.getMethod());
 	}
+
+	@Override
+	protected String getPageTitle() {
+		return "Login";
+	}
+
+	@Override
+	protected String getViewTitle() {
+		return "Login";
+	}
+
+	@Override
+	protected String getActiveMenu() {
+		return "login";
+	}
 }

@@ -40,4 +40,18 @@ public class UserController extends BaseController {
 		// TODO implement here
 	}
 
+	@Override
+	protected String getPageTitle() {
+		return "Home";
+	}
+
+	@Override
+	protected String getViewTitle() {
+		return "Dashboard";
+	}
+
+	@Override
+	protected String getActiveMenu() {
+		return "home";
+	}
 }
