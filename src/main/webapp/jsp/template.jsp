@@ -5,7 +5,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Balance | Page</title>
-<link rel="stylesheet" href="assets/css/style.css" />
+<%
+String styleCss = application.getContextPath().concat("/assets/css/style.css");
+%>
+<link rel="stylesheet" href="<%=styleCss %>" />
 </head>
 <body>
 	<jsp:useBean id="loginInfo" class="com.jdc.balance.security.LoginUser"
@@ -20,10 +23,11 @@
 
 		<nav></nav>
 	</header>
-	<aside>
-		<!-- User Profile -->
-	</aside>
-	<main>
+
+	<main class="employee">
+		<aside>
+			<!-- User Profile -->
+		</aside>
 		<jsp:include page="<%=content%>"></jsp:include>
 	</main>
 	<%

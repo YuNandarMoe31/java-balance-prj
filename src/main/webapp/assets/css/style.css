@@ -15,6 +15,16 @@ body {
 	height: 107%;
 }
 
+header {
+	background-color: teal;
+	min-height: 60px;
+	height: 60px;
+}
+
+.employee {
+	
+}
+
 .anonymous {
 	height: 100vh;
 	display: flex;
@@ -77,3 +87,4 @@ body {
 .card-inner {
 	width: 400px;
 }
+
