@@ -9,16 +9,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet({ 
-	"/login", 
-	"/logout" 
-})
+@WebServlet({ "/login", "/logout" })
 public class SecurityController extends BaseController {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void process(HttpServletRequest req, HttpServletResponse resp, String path) throws IOException, ServletException {
+	protected void process(HttpServletRequest req, HttpServletResponse resp, String path)
+			throws IOException, ServletException {
 		switch (path) {
 		case "/login" -> login(req, resp);
 		case "/logout" -> logout(req, resp);
@@ -26,18 +24,23 @@ public class SecurityController extends BaseController {
 	}
 
 	private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		if(isLoginAction(req)) {
+		if (isLoginAction(req)) {
 			// TODO Login Action
+			var loginInfo = getLoginInfo(req);
+
+			loginInfo.setLogin(true);
+
 			redirect(resp, "/employee/home");
 		} else {
 			navigate(req, resp, "login");
 		}
 	}
 
-	private void logout(HttpServletRequest req, HttpServletResponse resp) {
-		
+	private void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		logout(req);
+		redirect(resp, "/login");
 	}
-	
+
 	private boolean isLoginAction(HttpServletRequest req) {
 		return "POST".equals(req.getMethod());
 	}
