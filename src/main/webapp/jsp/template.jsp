@@ -33,11 +33,18 @@
 		</header>
 		<div class="content-container">
 			<aside>
-				<p>Aside</p>
 				<!-- Profile Image -->
-
+				<img class="profile-img" src="<%=getPath("/assets/images/img_profile_male.png") %>" alt="Profile Image">
 				<!-- User Information -->
-
+				<ul class="user-info">
+					<li class="user-name">Mg Mg</li>
+					<li class="user-role">Manager</li>
+					<li class="user-actions">
+						<a href="#">Edit Profile</a>
+						<a href="#">Change Password</a>
+					</li>
+				</ul>
+				
 				<!-- User Menu -->
 			</aside>
 			<!-- Employee Home -->

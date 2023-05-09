@@ -113,14 +113,56 @@ header>nav a:hover {
 }
 
 .content-container aside {
-	width: 30%;
+	width: 15%;
 	background-color: #F5F3DB;
 	border-radius: 5px;
 }
 
 .content-container .employee-home {
-	width: 70%;
+	width: 85%;
 	background-color: #F5F3DB;
+	color: #D1C553;
 	border-radius: 5px;
 	min-height: 100vh;
+	padding: 10px;
+}
+
+.profile-img {
+	width: 160px;
+    display: flex;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.user-info {
+	padding: 0;
+}
+
+.user-info li,
+.user-info > li > a {
+	color: #D1C553;
+	padding: 6px 0;
+	text-align: center;
+}
+
+.user-info .user-name {
+	font-size: 27px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.user-info .user-role {
+	font-size: 15px;
+}
+
+.user-actions > a {
+    font-size: 14px;
+    background-color: #fff;
+    display: block;
+    margin: 10px;
+}
+
+.user-actions > a:hover {
+	background-color: #EDE8BB;
+	color: #fff;
 }
