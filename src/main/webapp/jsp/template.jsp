@@ -15,32 +15,40 @@
 	<%
 	if (loginInfo.isLogin()) {
 	%>
+
 	<!-- Employee Template -->
-	<header class="container">
-		<h1 class="brand-logo">
-			<img src="<%=getPath("/assets/images/img_logo.png")%>"
-				alt="Balance Management">
-		</h1>
-
-		<nav>
-			<a href="#">Employee</a> <a href="#">Balance Report</a> <a href="#">Transactions</a>
-			<a href="<%=getPath("/logout")%>">Logout</a>
-		</nav>
-	</header>
-
 	<main class="employee">
-		<aside>
-			<!-- Profile Image -->
+		<header class="container">
+			<h1 class="brand-logo">
+				<img src="<%=getPath("/assets/images/img_logo.png")%>"
+					alt="Balance Management">
+			</h1>
 
-			<!-- User Information -->
+			<nav>
+				<a href="#">Balance Report</a> 
+				<a href="#">Transactions</a>
+				<a href="#">Employee</a> 
+				<a href="<%=getPath("/logout")%>">Logout</a>
+			</nav>
+		</header>
+		<div class="content-container">
+			<aside>
+				<p>Aside</p>
+				<!-- Profile Image -->
 
-			<!-- User Menu -->
-		</aside>
-		<jsp:include page="<%=content%>"></jsp:include>
+				<!-- User Information -->
+
+				<!-- User Menu -->
+			</aside>
+			<!-- Employee Home -->
+			<jsp:include page="<%=content%>"></jsp:include>
+		</div>
 	</main>
 	<%
 	} else {
 	%>
+
+	<!-- Anonymous Template -->
 	<main class="anonymous">
 		<!-- Anonymous Template -->
 		<jsp:include page="<%=content%>"></jsp:include>
@@ -49,7 +57,7 @@
 	<%
 	}
 	%>
-	
+
 	<!-- To Get Absolute Path -->
 	<%!String getPath(String path) {
 		return getServletContext().getContextPath().concat(path);
