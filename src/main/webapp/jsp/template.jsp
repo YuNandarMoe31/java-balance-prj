@@ -5,7 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Balance | Page</title>
-<link rel="stylesheet" href="assets/css/style.css" />
+<link rel="stylesheet" href="<%=getPath("/assets/css/style.css")%>" />
+<link rel="stylesheet" href="<%=getPath("/assets/css/reset.css")%>" />
 </head>
 <body>
 	<jsp:useBean id="loginInfo" class="com.jdc.balance.security.LoginUser"
@@ -14,21 +15,47 @@
 	<%
 	if (loginInfo.isLogin()) {
 	%>
-	<!-- Employee Template -->
-	<header>
-		<h1 class="brand-logo">Balance</h1>
 
-		<nav></nav>
-	</header>
-	<aside>
-		<!-- User Profile -->
-	</aside>
-	<main>
-		<jsp:include page="<%=content%>"></jsp:include>
+	<!-- Employee Template -->
+	<main class="employee">
+		<header class="container">
+			<h1 class="brand-logo">
+				<img src="<%=getPath("/assets/images/img_logo.png")%>"
+					alt="Balance Management">
+			</h1>
+
+			<nav>
+				<a href="#">Balance Report</a> 
+				<a href="#">Transactions</a>
+				<a href="#">Employee</a> 
+				<a href="<%=getPath("/logout")%>">Logout</a>
+			</nav>
+		</header>
+		<div class="content-container">
+			<aside>
+				<!-- Profile Image -->
+				<img class="profile-img" src="<%=getPath("/assets/images/img_profile_male.png") %>" alt="Profile Image">
+				<!-- User Information -->
+				<ul class="user-info">
+					<li class="user-name">Mg Mg</li>
+					<li class="user-role">Manager</li>
+					<li class="user-actions">
+						<a href="#">Edit Profile</a>
+						<a href="#">Change Password</a>
+					</li>
+				</ul>
+				
+				<!-- User Menu -->
+			</aside>
+			<!-- Employee Home -->
+			<jsp:include page="<%=content%>"></jsp:include>
+		</div>
 	</main>
 	<%
 	} else {
 	%>
+
+	<!-- Anonymous Template -->
 	<main class="anonymous">
 		<!-- Anonymous Template -->
 		<jsp:include page="<%=content%>"></jsp:include>
@@ -38,7 +65,10 @@
 	}
 	%>
 
-
+	<!-- To Get Absolute Path -->
+	<%!String getPath(String path) {
+		return getServletContext().getContextPath().concat(path);
+	}%>
 
 </body>
 </html>
