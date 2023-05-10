@@ -1,3 +1,3 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<p>This is home</p>
+<p>This is employee management view</p>

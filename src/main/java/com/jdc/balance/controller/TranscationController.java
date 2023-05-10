@@ -48,4 +48,19 @@ public class TranscationController extends BaseController {
 		// TODO implement here
 	}
 
+	@Override
+	protected String getPageTitle() {
+		return "Transaction";
+	}
+
+	@Override
+	protected String getViewTitle() {
+		return "Daily Transaction";
+	}
+
+	@Override
+	protected String getActiveMenu() {
+		return "transactions";
+	}
+
 }
