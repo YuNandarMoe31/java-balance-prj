@@ -26,8 +26,8 @@
 
 			<nav>
 				<a href="<%=getPath("/employee/home") %>" class='<%=getActiveClass(request, "home") %>'>Home</a>
-				<a href="#" class='<%=getActiveClass(request, "transactions") %>'>Incomes</a>
-				<a href="#" class='<%=getActiveClass(request, "transactions") %>'>Expenses</a>
+				<a href="<%=getPath("/employee/transaction/search?type=Income") %>" class='<%=getActiveClass(request, "incomes") %>'>Incomes</a>
+				<a href="<%=getPath("/employee/transaction/search?type=Expense") %>" class='<%=getActiveClass(request, "expenses") %>'>Expenses</a>
 				<a href="<%=getPath("/manager/balance") %>" class='<%=getActiveClass(request, "reports") %>'>Balance Report</a> 
 				<a href="<%=getPath("/manager/employee/search") %>" class='<%=getActiveClass(request, "employees") %>'>Employee</a> 
 				<a href="<%=getPath("/logout")%>">Logout</a>
