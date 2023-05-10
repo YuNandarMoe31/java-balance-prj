@@ -3,6 +3,7 @@ package com.jdc.balance.controller;
 import java.io.IOException;
 
 import com.jdc.balance.BaseController;
+import com.jdc.balance.Destination;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,7 +29,12 @@ public class EmployeeController extends BaseController {
 	}
 
 	private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		navigate(req, resp, "manager/employees");
+		navigate(new Destination.Builder()
+			.req(req).resp(resp)
+			.view("manager/employees")
+			.pageTitle("Employee Management")
+			.viewTitle("Employee")
+			.activeMenu("employees").build());
 	}
 
 	private void edit(HttpServletRequest req, HttpServletResponse resp) {
@@ -37,21 +43,6 @@ public class EmployeeController extends BaseController {
 
 	private void save(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO implement here
-	}
-
-	@Override
-	protected String getPageTitle() {
-		return "Employees";
-	}
-
-	@Override
-	protected String getViewTitle() {
-		return "Employee Management";
-	}
-
-	@Override
-	protected String getActiveMenu() {
-		return "employees";
 	}
 
 }

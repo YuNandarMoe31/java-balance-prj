@@ -15,22 +15,16 @@ public abstract class BaseController extends HttpServlet {
 
 	protected abstract void process(HttpServletRequest req, HttpServletResponse resp, String path)
 			throws ServletException, IOException;
-	
-	protected abstract String getPageTitle();
-	protected abstract String getViewTitle();
-	protected abstract String getActiveMenu();
-	
-	protected void navigate(HttpServletRequest req, HttpServletResponse resp, String view)
-			throws ServletException, IOException {
-		var content = String.format("/jsp/view/%s.jsp", view);
-		req.setAttribute("content", content);
-		
 
-		req.setAttribute("page-title", getPageTitle());
-		req.setAttribute("view-title", getViewTitle());
-		req.setAttribute("active-menu", getActiveMenu());
-		
-		getServletContext().getRequestDispatcher("/jsp/template.jsp").forward(req, resp);
+	protected void navigate(Destination destination) throws ServletException, IOException {
+		var content = String.format("/jsp/view/%s.jsp", destination.getView());
+		destination.getReq().setAttribute("content", content);
+
+		destination.getReq().setAttribute("page-title", destination.getPageTitile());
+		destination.getReq().setAttribute("view-title", destination.getViewTitle());
+		destination.getReq().setAttribute("active-menu",destination.getActiveMenu());
+
+		getServletContext().getRequestDispatcher("/jsp/template.jsp").forward(destination.getReq(), destination.getResp());
 	}
 
 	protected void redirect(HttpServletResponse resp, String path) throws IOException {

@@ -47,20 +47,4 @@ public class TranscationController extends BaseController {
 	private void approve(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO implement here
 	}
-
-	@Override
-	protected String getPageTitle() {
-		return "Transaction";
-	}
-
-	@Override
-	protected String getViewTitle() {
-		return "Daily Transaction";
-	}
-
-	@Override
-	protected String getActiveMenu() {
-		return "transactions";
-	}
-
 }
