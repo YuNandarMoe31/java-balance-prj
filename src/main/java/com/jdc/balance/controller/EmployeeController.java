@@ -1,7 +1,11 @@
 package com.jdc.balance.controller;
 
-import com.jdc.balance.BaseController;
+import java.io.IOException;
 
+import com.jdc.balance.BaseController;
+import com.jdc.balance.Destination;
+
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +20,7 @@ public class EmployeeController extends BaseController {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void process(HttpServletRequest req, HttpServletResponse resp, String path) {
+	protected void process(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
 		switch(path) {
 		case "/manager/employee/search" -> search(req, resp); 
 		case "/manager/employee/edit" -> edit(req, resp);
@@ -24,8 +28,13 @@ public class EmployeeController extends BaseController {
 		}
 	}
 
-	private void search(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO implement here
+	private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		navigate(new Destination.Builder()
+			.req(req).resp(resp)
+			.view("manager/employees")
+			.pageTitle("Employee Management")
+			.viewTitle("Employee")
+			.activeMenu("employees").build());
 	}
 
 	private void edit(HttpServletRequest req, HttpServletResponse resp) {

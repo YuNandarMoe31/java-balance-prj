@@ -3,6 +3,7 @@ package com.jdc.balance.controller;
 import java.io.IOException;
 
 import com.jdc.balance.BaseController;
+import com.jdc.balance.Destination;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,7 +33,10 @@ public class SecurityController extends BaseController {
 
 			redirect(resp, "/employee/home");
 		} else {
-			navigate(req, resp, "login");
+			navigate(new Destination.Builder()
+				.req(req).resp(resp)
+				.view("login")
+				.pageTitle("Login").build());
 		}
 	}
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Balance | Page</title>
+<title>Balance | <%=request.getAttribute("page-title") %></title>
 <link rel="stylesheet" href="<%=getPath("/assets/css/style.css")%>" />
 <link rel="stylesheet" href="<%=getPath("/assets/css/reset.css")%>" />
 </head>
@@ -25,9 +25,11 @@
 			</h1>
 
 			<nav>
-				<a href="#">Balance Report</a> 
-				<a href="#">Transactions</a>
-				<a href="#">Employee</a> 
+				<a href="<%=getPath("/employee/home") %>" class='<%=getActiveClass(request, "home") %>'>Home</a>
+				<a href="<%=getPath("/employee/transaction/search?type=Income") %>" class='<%=getActiveClass(request, "incomes") %>'>Incomes</a>
+				<a href="<%=getPath("/employee/transaction/search?type=Expense") %>" class='<%=getActiveClass(request, "expenses") %>'>Expenses</a>
+				<a href="<%=getPath("/manager/balance") %>" class='<%=getActiveClass(request, "reports") %>'>Balance Report</a> 
+				<a href="<%=getPath("/manager/employee/search") %>" class='<%=getActiveClass(request, "employees") %>'>Employee</a> 
 				<a href="<%=getPath("/logout")%>">Logout</a>
 			</nav>
 		</header>
@@ -40,15 +42,21 @@
 					<li class="user-name">Mg Mg</li>
 					<li class="user-role">Manager</li>
 					<li class="user-actions">
+						<a href="#">Upload Photo</a>
 						<a href="#">Edit Profile</a>
 						<a href="#">Change Password</a>
 					</li>
-				</ul>
-				
+				</ul>			
 				<!-- User Menu -->
 			</aside>
+			
 			<!-- Employee Home -->
-			<jsp:include page="<%=content%>"></jsp:include>
+			<section class="employee-home">
+				<div class="view-title">
+					<%=request.getAttribute("view-title") %>
+				</div>
+				<jsp:include page="<%=content%>"></jsp:include>
+			</section>
 		</div>
 	</main>
 	<%
@@ -66,9 +74,16 @@
 	%>
 
 	<!-- To Get Absolute Path -->
-	<%!String getPath(String path) {
-		return getServletContext().getContextPath().concat(path);
+	<%!
+		String getPath(String path) {
+			return getServletContext().getContextPath().concat(path);
 	}%>
+	
+	<%!
+		String getActiveClass(HttpServletRequest req, String menu) {
+			return req.getAttribute("active-menu").equals(menu) ? "active" : "";
+	}
+	%>
 
 </body>
 </html>
