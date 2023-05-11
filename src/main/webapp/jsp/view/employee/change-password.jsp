@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<div class="view-content change-pass">
-	<form action="#" method="post" class="card-form">
+<div class="view-content">
+	<form method="post" class="card-form">
 		<label>Original Password</label> 
 		<input type="password" name="old-pass" placeholder="Enter Password">
 	
