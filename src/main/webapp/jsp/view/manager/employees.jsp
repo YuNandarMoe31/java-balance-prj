@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <div class="list-content">
-	<form action="" class="form-inline">
+	<form class="form-inline">
 		<div class="form-group">
-			<label>Role</label> <select name="role">
+			<label>Role</label> 
+			<select name="role">
 				<option value="All">All</option>
 				<option value="Employee">Employee</option>
 				<option value="Manager">Manager</option>
@@ -11,8 +12,8 @@
 		</div>
 
 		<div class="form-group">
-			<label>Name</label> <input type="text" name="name"
-				placeholder="Search Name">
+			<label>Name</label> 
+			<input type="text" name="name" placeholder="Search Name">
 		</div>
 		
 		<button class="btn">Search</button>

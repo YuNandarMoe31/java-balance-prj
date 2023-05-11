@@ -283,3 +283,7 @@ header>nav a.active {
 .employee-list tr td {
 	padding: 14px;
 }
+
+.employee-list .digit {
+	text-align: right;
+}
