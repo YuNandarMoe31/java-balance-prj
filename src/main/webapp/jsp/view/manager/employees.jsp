@@ -17,7 +17,7 @@
 		</div>
 		
 		<button class="btn">Search</button>
-        <a href="#" class="btn">Add New</a>
+        <a href="<%=getPath("/manager/employee/edit") %>" class="btn">Add New</a>
 	</form>
 	<table class="employee-list">
 		<thead>
@@ -46,4 +46,9 @@
 		</tbody>
 	</table>
 
+	<!-- To Get Absolute Path -->
+	<%!
+		String getPath(String path) {
+			return getServletContext().getContextPath().concat(path);
+	}%>
 </div>

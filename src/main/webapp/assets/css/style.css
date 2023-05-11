@@ -78,7 +78,7 @@ header>nav a.active {
 	margin-bottom: 46px;
 }
 
-.card-form>input {
+.card-form input {
 	margin: 4px 0 50px 0;
 	background-color: transparent;
 	color: #897F25;
@@ -233,6 +233,24 @@ header>nav a.active {
 
 .form-group input:focus {
 	outline: none;
+}
+
+.row {
+	display: flex;
+    column-gap: 40px;
+}
+
+.employee-edit .form-edit {
+	width: 150px;
+}
+
+.employee-edit .form-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.employee-edit input {
+	margin-top: 18px;
 }
 
 .list-content .btn {
