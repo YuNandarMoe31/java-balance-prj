@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<div class="view-content">
+<div class="list-content">
 	<form action="" class="form-inline">
 		<div class="form-group">
 			<label>Role</label> <select name="role">
@@ -15,10 +15,10 @@
 				placeholder="Search Name">
 		</div>
 		
-		<button>Search</button>
-        <a href="#">Add New</a>
+		<button class="btn">Search</button>
+        <a href="#" class="btn">Add New</a>
 	</form>
-	<table>
+	<table class="employee-list">
 		<thead>
 			<tr>
 				<th>Code</th>
@@ -31,7 +31,17 @@
 			</tr>
 		</thead>
 		<tbody>
-
+			<% for(int i=0; i<10; i++) { %> 
+           <tr>
+                <td>EMP001</td>
+                <td>Mg Mg</td>
+                <td>Manager</td>
+                <td>mgmg@gmail.com </td>
+                <td>091234564</td>
+                <td>2018-01-01</td>
+                <td></td>
+           </tr>
+           <% } %>
 		</tbody>
 	</table>
 

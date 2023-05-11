@@ -126,7 +126,7 @@ header>nav a.active {
 	border-radius: 5px;
 }
 
-.content-container .page-content{
+.content-container .page-content {
 	width: 85%;
 	background-color: #F5F3DB;
 	color: #D1C553;
@@ -186,6 +186,10 @@ header>nav a.active {
 	padding: 25px;
 }
 
+.list-content {
+	padding: 25px;
+}
+
 .view-content .card-form {
 	margin-top: 15px;
 }
@@ -193,4 +197,89 @@ header>nav a.active {
 .view-content label {
 	color: #D1C553;
 	margin-bottom: 15px;
+}
+
+/* Employee List Table */
+.form-inline {
+	display: flex;
+	margin-bottom: 30px;
+	align-items: center;
+}
+
+.form-inline .form-group {
+	margin-right: 20px;
+}
+
+.form-group input, .form-group select {
+	border: 1px solid #fff;
+	border-radius: 5px;
+	padding: 8px;
+	background-color: #DAD076;
+	width: 200px;
+	color: #897F25;
+}
+
+.form-group select {
+	width: 100px;
+}
+
+.form-group select option {
+	padding: 15px;
+}
+
+.form-group label {
+	margin-right: 5px;
+}
+
+.form-group input:focus {
+	outline: none;
+}
+
+.list-content .btn {
+	border: none;
+	border-radius: 5px;
+	padding: 8px 10px;
+	background-color: #fff;
+	color: #bab05f;
+	font-size: 13px;
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.list-content .btn:hover {
+	background-color: #EDE8BB;
+	color: #fff;
+}
+
+.employee-list {
+	text-align: left;
+	border-collapse: collapse;
+	padding: 14px;
+}
+
+.employee-list thead th {
+	background-color: #DAD076;
+	color: #897F25;
+}
+
+.employee-list tbody tr:nth-child(even) {
+	background-color: #EDE8BB;
+}
+
+.employee-list tbody tr:hover {
+	opacity: 0.5;
+}
+
+.employee-list th {
+	border-bottom: 2px solid #DAD076;
+	width: 200px;
+	padding: 14px;
+}
+
+.employee-list td {
+	border-bottom: 1px solid #DAD076;
+}
+
+.employee-list tr td {
+	padding: 14px;
 }
