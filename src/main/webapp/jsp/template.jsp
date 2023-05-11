@@ -51,7 +51,7 @@
 			</aside>
 			
 			<!-- Employee Home -->
-			<section class="employee-home">
+			<section class="page-content">
 				<div class="view-title">
 					<%=request.getAttribute("view-title") %>
 				</div>
