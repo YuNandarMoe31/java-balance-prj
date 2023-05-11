@@ -20,7 +20,7 @@
 		</div>
 		
 		<button class="btn">Search</button>
-        <a href="#" class="btn">Add New</a>
+		<a href="#" class="btn">Add New</a>
 	</form>
 	
 	<table class="employee-list">
