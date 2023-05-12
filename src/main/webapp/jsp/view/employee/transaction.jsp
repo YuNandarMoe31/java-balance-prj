@@ -3,18 +3,6 @@
 <div class="list-content">
 	<form class="form-inline">
 		<div class="form-group">
-			<label>Employee</label> 
-			<input type="text" name="name" placeholder="Employee Name">	
-		</div>
-		
-		<div class="form-group">
-			<label>Employee</label> 
-			<select name="category">
-				<option value="All">All</option>
-			</select>	
-		</div>
-		
-		<div class="form-group">
 			<label>Date From</label> 
 			<input type="date" name="from" placeholder="Search From">
 		</div>
@@ -23,6 +11,12 @@
 			<label>Date To</label> 
 			<input type="date" name="to" placeholder="Search To">
 		</div>
+		
+		<div class="form-group">
+			<label>Category</label> 
+			<input type="text" name="category" placeholder="Search Category">
+		</div>
+		
 		
 		<button class="btn">Search</button>
 		<a href="<%=getPath("/employee/transaction/edit") %>" class="btn">Add New</a>

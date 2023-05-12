@@ -4,13 +4,13 @@
 <div class="list-content">
 	<div class="transaction-list">
 		<div class="form-group">
-			<label>Balance ID</label> 
-			<input type="text" disabled="disabled" value="202108-001">
-		</div>	
-		<div class="form-group">
 			<label>Date</label> 
 			<input type="text" disabled="disabled" value="202108-001">
-			</div>
+		</div>
+		<div class="form-group">
+			<label>Category</label> 
+			<input type="text" disabled="disabled" value="Stationary">
+		</div>	
 		<div class="form-group">
 			<label>Items</label> 
 			<input type="text" disabled="disabled" value="3" class="digit">

@@ -3,13 +3,6 @@
 <div class="list-content">
 	<form class="form-inline">
 		<div class="form-group">
-			<label>Category</label> 
-			<select name="category">
-				<option value="All">All</option>
-			</select>
-		</div>
-
-		<div class="form-group">
 			<label>Date From</label> 
 			<input type="date" name="from" placeholder="Search From">
 		</div>
