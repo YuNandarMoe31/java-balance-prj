@@ -307,6 +307,23 @@ header>nav a.active {
 	text-decoration: underline;
 }
 
-.employee-list .digit {
+.digit {
 	text-align: right;
+}
+
+/* Transaction List Table */
+.transaction-list {
+	column-count: 3;
+	column-gap: 155px;
+	margin-bottom: 10px;
+}
+
+.transaction-list .form-group {
+	display: flex;
+	margin-bottom: 10px;
+    align-items: center;
+}
+
+.transaction-list .form-group label {
+	width: 100px;
 }
