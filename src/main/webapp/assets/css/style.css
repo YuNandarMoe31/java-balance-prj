@@ -78,13 +78,14 @@ header>nav a.active {
 	margin-bottom: 46px;
 }
 
-.card-form>input {
+.card-form input {
 	margin: 4px 0 50px 0;
 	background-color: transparent;
 	color: #897F25;
 	padding: 0.4rem;
 	border-style: none;
 	border-bottom: 1px solid #fff;
+	padding-left: 0;
 }
 
 .card-form>input:focus {
@@ -99,11 +100,13 @@ header>nav a.active {
 	border: none;
 	padding: 18px;
 	cursor: pointer;
+	background-color: #fff;
 	color: #897F25;
 }
 
 .card-form>button:hover {
 	background-color: #EDE8BB;
+	color: #fff;
 }
 
 .card-inner {
@@ -123,28 +126,27 @@ header>nav a.active {
 	border-radius: 5px;
 }
 
-.content-container .employee-home {
+.content-container .page-content {
 	width: 85%;
 	background-color: #F5F3DB;
 	color: #D1C553;
 	border-radius: 5px;
 	min-height: 100vh;
-	padding: 10px;
+	padding: 20px;
 }
 
 .profile-img {
 	width: 160px;
-    display: flex;
-    margin: 0 auto;
-    padding-top: 30px;
+	display: flex;
+	margin: 0 auto;
+	padding-top: 30px;
 }
 
 .user-info {
 	padding: 0;
 }
 
-.user-info li,
-.user-info > li > a {
+.user-info li, .user-info>li>a {
 	color: #D1C553;
 	padding: 6px 0;
 	text-align: center;
@@ -152,23 +154,23 @@ header>nav a.active {
 
 .user-info .user-name {
 	font-size: 27px;
-    font-weight: 600;
-    text-transform: uppercase;
+	font-weight: 600;
+	text-transform: uppercase;
 }
 
 .user-info .user-role {
 	font-size: 15px;
 }
 
-.user-actions > a {
-    font-size: 14px;
-    background-color: #fff;
-    display: block;
-    margin: 10px;
-    border-radius: 5px;
+.user-actions>a {
+	font-size: 14px;
+	background-color: #fff;
+	display: block;
+	margin: 10px;
+	border-radius: 5px;
 }
 
-.user-actions > a:hover {
+.user-actions>a:hover {
 	background-color: #EDE8BB;
 	color: #fff;
 }
@@ -178,3 +180,158 @@ header>nav a.active {
 	font-weight: 700;
 }
 
+/* Change Password */
+.view-content {
+	width: 400px;
+	padding: 25px;
+}
+
+.list-content {
+	padding: 25px;
+}
+
+.view-content .card-form {
+	margin-top: 15px;
+}
+
+.view-content label {
+	color: #D1C553;
+	margin-bottom: 15px;
+}
+
+/* Employee List Table */
+.form-inline {
+	display: flex;
+	margin-bottom: 30px;
+	align-items: center;
+}
+
+.form-inline .form-group {
+	margin-right: 20px;
+}
+
+.form-group input, .form-group select {
+	border: 1px solid #fff;
+	border-radius: 5px;
+	padding: 8px;
+	background-color: #DAD076;
+	width: 160px;
+	color: #897F25;
+}
+
+.form-group select {
+	width: 100px;
+}
+
+.form-group select option {
+	padding: 15px;
+}
+
+.form-group label {
+	margin-right: 5px;
+}
+
+.form-group input:focus {
+	outline: none;
+}
+
+.row {
+	display: flex;
+    column-gap: 40px;
+}
+
+.employee-edit .form-edit {
+	width: 150px;
+}
+
+.employee-edit .form-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.employee-edit input {
+	margin-top: 18px;
+}
+
+.list-content .btn {
+	border: none;
+	border-radius: 5px;
+	padding: 8px 10px;
+	background-color: #fff;
+	color: #bab05f;
+	font-size: 13px;
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.list-content .btn:hover {
+	background-color: #EDE8BB;
+	color: #fff;
+}
+
+.employee-list {
+	text-align: left;
+	border-collapse: collapse;
+	padding: 14px;
+}
+
+.employee-list thead th {
+	background-color: #DAD076;
+	color: #897F25;
+}
+
+.employee-list tbody tr:nth-child(even) {
+	background-color: #EDE8BB;
+}
+
+.employee-list tbody tr:hover {
+	opacity: 0.5;
+}
+
+.employee-list th {
+	border-bottom: 2px solid #DAD076;
+	width: 200px;
+	padding: 14px;
+}
+
+.employee-list td {
+	border-bottom: 1px solid #DAD076;
+}
+
+.employee-list tr td {
+	padding: 14px;
+}
+
+.employee-list tr a {
+	color: #D1C553;
+	text-decoration: underline;
+}
+
+.digit {
+	text-align: right;
+}
+
+/* Transaction List Table */
+.transaction-list {
+	column-count: 3;
+	column-gap: 155px;
+	margin-bottom: 10px;
+}
+
+.transaction-list .form-group {
+	display: flex;
+	margin-bottom: 10px;
+    align-items: center;
+}
+
+.transaction-list .form-group label {
+	width: 100px;
+}
+
+.transaction-page input[type=number] {
+	width: 80px;
+}
+
+.transaction-page input[type=number]::placeholder {
+	text-align: right;
+}

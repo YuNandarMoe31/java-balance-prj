@@ -25,7 +25,7 @@ public class SecurityController extends BaseController {
 	}
 
 	private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		if (isLoginAction(req)) {
+		if (isPostRequest(req)) {
 			// TODO Login Action
 			var loginInfo = getLoginInfo(req);
 
@@ -43,9 +43,5 @@ public class SecurityController extends BaseController {
 	private void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		logout(req);
 		redirect(resp, "/login");
-	}
-
-	private boolean isLoginAction(HttpServletRequest req) {
-		return "POST".equals(req.getMethod());
 	}
 }

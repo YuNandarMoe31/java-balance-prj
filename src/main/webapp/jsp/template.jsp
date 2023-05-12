@@ -43,15 +43,15 @@
 					<li class="user-role">Manager</li>
 					<li class="user-actions">
 						<a href="#">Upload Photo</a>
-						<a href="#">Edit Profile</a>
-						<a href="#">Change Password</a>
+						<a href="<%=getPath("/employee/edit-profile") %>">Edit Profile</a>
+						<a href="<%=getPath("/employee/change-pass") %>">Change Password</a>
 					</li>
 				</ul>			
 				<!-- User Menu -->
 			</aside>
 			
 			<!-- Employee Home -->
-			<section class="employee-home">
+			<section class="page-content">
 				<div class="view-title">
 					<%=request.getAttribute("view-title") %>
 				</div>

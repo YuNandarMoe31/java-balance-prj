@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet({ 
 	"/employee/home", 
 	"/employee/change-pass", 
-	"/employee/save-profile" 
+	"/employee/edit-profile"
 })
 public class UserController extends BaseController {
 
@@ -24,7 +24,7 @@ public class UserController extends BaseController {
 		switch (path) {
 		case "/employee/home" -> loadHome(req, resp);
 		case "/employee/change-pass" -> changePassword(req, resp);
-		case "/employee/save-profile" -> saveProfile(req, resp);
+		case "/employee/edit-profile" -> editProfile(req, resp);
 		}
 	}
 
@@ -38,11 +38,31 @@ public class UserController extends BaseController {
 			.activeMenu("home").build());
 	}
 
-	private void changePassword(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO implement here
+	private void changePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		if(isPostRequest(req))	{
+			// TODO Save Password
+			redirect(resp, "/employee/home");
+		} else {			
+			navigate(new Destination.Builder()
+				.req(req).resp(resp)
+				.view("employee/change-password")
+				.pageTitle("Password")
+				.viewTitle("Change Password")
+				.activeMenu("home").build());
+		}
 	}
-
-	private void saveProfile(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO implement here
+	
+	private void editProfile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		if(isPostRequest(req)) {
+			// TODO Save Profile
+			redirect(resp, "/employee/home");
+		} else {
+			navigate(new Destination.Builder()
+				.req(req).resp(resp)
+				.view("employee/edit-profile")
+				.pageTitle("Profile")
+				.viewTitle("Edit Profile")
+				.activeMenu("home").build());
+		}
 	}
 }

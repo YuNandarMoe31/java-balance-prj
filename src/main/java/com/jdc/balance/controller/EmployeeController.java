@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet({
 	"/manager/employee/search", 
 	"/manager/employee/edit", 
-	"/manager/employee/save"
 })
 public class EmployeeController extends BaseController {
 
@@ -24,11 +23,11 @@ public class EmployeeController extends BaseController {
 		switch(path) {
 		case "/manager/employee/search" -> search(req, resp); 
 		case "/manager/employee/edit" -> edit(req, resp);
-		case "/manager/employee/save" -> save(req, resp); 
 		}
 	}
 
 	private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Employee Search Action
 		navigate(new Destination.Builder()
 			.req(req).resp(resp)
 			.view("manager/employees")
@@ -37,12 +36,19 @@ public class EmployeeController extends BaseController {
 			.activeMenu("employees").build());
 	}
 
-	private void edit(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO implement here
+	private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		if(isPostRequest(req)) {
+			// TODO Employee Save Action
+			redirect(resp, "/manager/employee/search");
+		} else {
+			var action = req.getParameter("id") == null ? "Add New Employee" : "Edit Employee";
+			// TODO Employee Edit Action
+			navigate(new Destination.Builder()
+				.req(req).resp(resp)
+				.view("manager/employee-edit")
+				.pageTitle(action)
+				.viewTitle(action)
+				.activeMenu("employees").build());	
+		}
 	}
-
-	private void save(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO implement here
-	}
-
 }
