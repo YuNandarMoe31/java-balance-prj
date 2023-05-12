@@ -302,6 +302,11 @@ header>nav a.active {
 	padding: 14px;
 }
 
+.employee-list tr a {
+	color: #D1C553;
+	text-decoration: underline;
+}
+
 .employee-list .digit {
 	text-align: right;
 }

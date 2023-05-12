@@ -25,7 +25,7 @@
 		</div>
 		
 		<button class="btn">Search</button>
-		<a href="#" class="btn">Add New</a>
+		<a href="<%=getPath("/employee/transaction/edit") %>" class="btn">Add New</a>
 	</form>
 	
 	<table class="employee-list">
@@ -34,6 +34,7 @@
 				<th>Date</th>
 				<th>Employee</th>
 				<th>Category</th>
+				<th>Approved</th>
 				<th>Items</th>
 				<th>Amount</th>
 			</tr>
@@ -41,13 +42,22 @@
 		<tbody>
 			<% for(int i=0; i<10; i++) { %> 
            <tr>
-                <td>2023-05-11</td>
+                <td>
+                	<a href="<%=getPath("/employee/transaction/details") %>">2023-05-12</a>
+                </td>
                 <td>Mg Mg</td>
                 <td>Java Basic</td>
+                <td>Yes</td>
                 <td class="digit">5</td>
                 <td class="digit">500,000</td>
            </tr>
            <% } %>
 		</tbody>
 	</table>
+	
+	<!-- To Get Absolute Path -->
+	<%!
+		String getPath(String path) {
+			return getServletContext().getContextPath().concat(path);
+	}%>
 </div>
