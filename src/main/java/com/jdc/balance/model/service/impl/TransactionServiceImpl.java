@@ -1,18 +1,32 @@
 package com.jdc.balance.model.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
+import com.jdc.balance.model.ServiceManager.LifeCycle;
 import com.jdc.balance.model.domain.Transaction;
 import com.jdc.balance.model.domain.Transaction.Type;
 import com.jdc.balance.model.repo.TransactionRepo;
+import com.jdc.balance.model.repo.impl.TransactionRepoImpl;
 import com.jdc.balance.model.service.BalanceBusinessException;
 import com.jdc.balance.model.service.TransactionService;
 
-public class TransactionServiceImpl implements TransactionService {
+public class TransactionServiceImpl implements TransactionService, LifeCycle {
 
 	private TransactionRepo repo;
+	private String storage;
+	private static final String FILE_NAME = "transactions.dat";
+	
+	public TransactionServiceImpl(String storage) {
+		this.storage = storage;
+		repo = new TransactionRepoImpl();
+	}
 
 	@Override
 	public List<Transaction> search(Type type, Date from, Date to, String category) {
@@ -84,4 +98,25 @@ public class TransactionServiceImpl implements TransactionService {
 		
 	}
 
+	@Override
+	public void load() {
+		try(var input = new ObjectInputStream(new FileInputStream(new File(storage, FILE_NAME)))) {
+			var object = input.readObject();
+			
+			if(null != object) {
+				repo = (TransactionRepo) object;
+			}
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} 
+	}
+
+	@Override
+	public void save() {
+		try(var output = new ObjectOutputStream(new FileOutputStream(new File(storage, FILE_NAME)))) {
+			output.writeObject(repo);
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+	}
 }
