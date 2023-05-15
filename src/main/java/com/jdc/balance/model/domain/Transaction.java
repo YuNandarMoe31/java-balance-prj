@@ -1,6 +1,7 @@
 package com.jdc.balance.model.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class Transaction implements Serializable {
@@ -16,6 +17,8 @@ public class Transaction implements Serializable {
 	private Employee employee;
 
 	private List<TransactionClass> details;
+
+	private Date date;
 
 	private Type type;
 
@@ -61,6 +64,14 @@ public class Transaction implements Serializable {
 
 	public void setDetails(List<TransactionClass> details) {
 		this.details = details;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public Type getType() {
