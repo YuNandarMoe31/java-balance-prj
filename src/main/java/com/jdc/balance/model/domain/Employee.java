@@ -3,7 +3,7 @@ package com.jdc.balance.model.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Employee implements Serializable{
+public class Employee implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -14,6 +14,8 @@ public class Employee implements Serializable{
 	private String phone;
 
 	private String email;
+
+	private String password;
 
 	private Date registrationDate;
 
@@ -55,6 +57,14 @@ public class Employee implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Date getRegistrationDate() {

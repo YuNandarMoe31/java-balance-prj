@@ -1,9 +1,11 @@
 package com.jdc.balance.model.service;
 
+import com.jdc.balance.model.domain.Employee;
+
 public interface UserService {
 
 	public void changePass(String code, String oldPass, String newPass);
 
-	public String login(String code, String pass);
+	public Employee login(String code, String pass);
 
 }
