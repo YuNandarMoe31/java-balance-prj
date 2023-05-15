@@ -1,13 +1,15 @@
 package com.jdc.balance.model.repo.impl;
 
-public class TransactionIdGenerator {
+import java.io.Serializable;
 
-	public TransactionIdGenerator() {
-	}
+public class TransactionIdGenerator implements Serializable {
 
-	public int next() {
-		// TODO implement here
-		return 0;
+	private static final long serialVersionUID = 1L;
+	
+	private int id;
+	
+	public synchronized int next() {	
+		return ++id;
 	}
 
 }

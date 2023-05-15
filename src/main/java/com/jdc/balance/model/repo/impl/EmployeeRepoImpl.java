@@ -1,40 +1,47 @@
 package com.jdc.balance.model.repo.impl;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import com.jdc.balance.model.domain.Employee;
 import com.jdc.balance.model.repo.EmployeeRepo;
 
-public class EmployeeRepoImpl implements EmployeeRepo {
+public class EmployeeRepoImpl implements EmployeeRepo, Serializable{
 
-	private Set<Employee> domain;
-
+	private static final long serialVersionUID = 1L;
+	
+	private Map<String, Employee> domain;
 	private EmployeeCodeGenerator codeGenerator;
 
+	public EmployeeRepoImpl() {
+		domain = new HashMap<>();
+		codeGenerator = new EmployeeCodeGenerator();
+	}
+	
 	@Override
-	public List<Employee> search(Predicate<Employee> filter) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Employee> search(Predicate<Employee> filter) {	
+		return domain.values().stream().filter(filter).toList();
 	}
 
 	@Override
 	public Employee create(Employee data) {
-		// TODO Auto-generated method stub
-		return null;
+		var code = codeGenerator.next();
+		data.setCode(code);
+		domain.put(code, data);
+		return data;
 	}
 
 	@Override
 	public Employee update(Employee data) {
-		// TODO Auto-generated method stub
-		return null;
+		domain.put(data.getCode(), data);
+		return data;
 	}
 
 	@Override
-	public Employee findById(String code) {
-		// TODO Auto-generated method stub
-		return null;
+	public Employee findByCode(String code) {
+		return domain.get(code);
 	}
-
 }

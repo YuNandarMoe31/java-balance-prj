@@ -1,13 +1,15 @@
 package com.jdc.balance.model.repo.impl;
 
-public class EmployeeCodeGenerator {
+import java.io.Serializable;
 
-	public EmployeeCodeGenerator() {
+public class EmployeeCodeGenerator implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	private int id;
+	
+	public synchronized String next() {
+		return String.format("EMP%03d", ++id);
 	}
-
-	public String next() {
-		// TODO implement here
-		return "";
-	}
-
+	
 }

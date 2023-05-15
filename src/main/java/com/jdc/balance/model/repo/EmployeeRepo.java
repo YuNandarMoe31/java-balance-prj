@@ -13,6 +13,7 @@ public interface EmployeeRepo {
 
 	public Employee update(Employee data);
 
-	public Employee findById(String code);
+
+	public Employee findByCode(String code);
 
 }

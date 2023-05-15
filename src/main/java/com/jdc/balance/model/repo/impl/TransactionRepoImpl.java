@@ -1,43 +1,48 @@
 package com.jdc.balance.model.repo.impl;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import com.jdc.balance.model.domain.Transaction;
 import com.jdc.balance.model.repo.TransactionRepo;
 
-public class TransactionRepoImpl implements TransactionRepo {
+public class TransactionRepoImpl implements TransactionRepo, Serializable {
 
-	public TransactionRepoImpl() {
-	}
-
-	private Set<Transaction> domain;
+	private static final long serialVersionUID = 1L;
 	
+	private Map<Integer, Transaction> domain;
 	private TransactionIdGenerator idGenerator;
+	
+	public TransactionRepoImpl() {
+		domain = new HashMap<>();
+		idGenerator = new TransactionIdGenerator();
+	}
 
 	@Override
 	public Transaction create(Transaction data) {
-		// TODO Auto-generated method stub
-		return null;
+		var id = idGenerator.next();
+		data.setId(id);
+		domain.put(id, data);
+		return data;
 	}
 
 	@Override
 	public Transaction update(Transaction data) {
-		// TODO Auto-generated method stub
-		return null;
+		domain.put(data.getId(), data);
+		return data;
 	}
 
 	@Override
 	public Transaction findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return domain.get(id);
 	}
 
 	@Override
-	public List<Transaction> search(Predicate<Transaction> filter) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Transaction> search(Predicate<Transaction> filter) {		
+		return domain.values().stream().filter(filter).toList();
 	}
 
 }

@@ -1,13 +1,14 @@
 package com.jdc.balance.model.service;
 
 import java.util.Date;
+import java.util.List;
 
 import com.jdc.balance.model.domain.Transaction;
 import com.jdc.balance.model.domain.Transaction.Type;
 
 public interface TransactionService {
 
-	public Transaction search(Type type, Date from, Date to, String category);
+	public List<Transaction> search(Type type, Date from, Date to, String category);
 
 	public Transaction findById(int id);
 
