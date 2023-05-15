@@ -2,6 +2,10 @@ package com.jdc.balance;
 
 import java.io.IOException;
 
+import com.jdc.balance.model.ServiceManager;
+import com.jdc.balance.model.service.EmployeeService;
+import com.jdc.balance.model.service.TransactionService;
+import com.jdc.balance.model.service.UserService;
 import com.jdc.balance.security.LoginUser;
 
 import jakarta.servlet.ServletException;
@@ -57,5 +61,17 @@ public abstract class BaseController extends HttpServlet {
 	
 	protected boolean isPostRequest(HttpServletRequest req) {
 		return "POST".equals(req.getMethod());
+	}
+	
+	protected TransactionService transactionService() {
+		return (TransactionService) getServletContext().getAttribute(ServiceManager.TRANSACTION_KEY);
+	}
+	
+	protected UserService userService() {
+		return (UserService) getServletContext().getAttribute(ServiceManager.EMPLOYEE_KEY);
+	}
+	
+	protected EmployeeService employeeService() {
+		return (EmployeeService) getServletContext().getAttribute(ServiceManager.EMPLOYEE_KEY);
 	}
 }
