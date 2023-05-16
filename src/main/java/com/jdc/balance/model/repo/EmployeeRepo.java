@@ -16,4 +16,6 @@ public interface EmployeeRepo {
 
 	public Employee findByCode(String code);
 
+	public int employeeCount();
+
 }

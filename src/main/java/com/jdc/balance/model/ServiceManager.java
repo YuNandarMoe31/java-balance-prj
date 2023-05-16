@@ -1,6 +1,5 @@
 package com.jdc.balance.model;
 
-import com.jdc.balance.model.domain.Transaction;
 import com.jdc.balance.model.service.impl.EmployeeServiceImpl;
 import com.jdc.balance.model.service.impl.TransactionServiceImpl;
 

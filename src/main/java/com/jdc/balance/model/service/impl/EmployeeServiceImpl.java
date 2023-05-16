@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -105,6 +106,17 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 			
 			if(null != object) {
 				repo = (EmployeeRepo) object;
+			}
+			
+			if(repo.employeeCount() == 0) {
+				var manager = new Employee();
+				manager.setRole(Role.Manager);
+				manager.setName("Manager");
+				manager.setEmail("manager@gmail.com");
+				manager.setPhone("0923456543");
+				manager.setRegistrationDate(new Date());
+				
+				repo.create(manager);
 			}
 		} catch (Exception e) {			
 			e.printStackTrace();
