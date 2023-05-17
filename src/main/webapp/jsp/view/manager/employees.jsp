@@ -35,21 +35,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<jsp:useBean id="list" scope="request"
-				type="java.util.List<com.jdc.balance.model.domain.Employee>"></jsp:useBean>
-			<%
-			for (Employee emp : list) {
-			%>
+			<jsp:useBean id="list" scope="request" type="java.util.List<com.jdc.balance.model.domain.Employee>" />
+			<% for (Employee emp : list) { %>
 			<tr>
 				<td><%=emp.getCode()%></td>
 				<td><%=emp.getName()%></td>
 				<td><%=emp.getRole()%></td>
 				<td><%=emp.getEmail()%></td>
 				<td><%=emp.getPhone()%></td>
-				<td><%=emp.getRegistrationDate()%></td>
-				<td><%=emp.getRetireDate()%></td>
+				<td><%=getDateString(emp.getRegistrationDate())%></td>
+				<td><%=getDateString(emp.getRetireDate())%></td>
 			</tr>
-
 			<%
 			}
 			%>

@@ -6,6 +6,7 @@ import com.jdc.balance.BaseController;
 import com.jdc.balance.Destination;
 import com.jdc.balance.model.domain.Employee;
 import com.jdc.balance.model.domain.Employee.Role;
+import com.jdc.balance.utils.DateUtils;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -61,6 +62,8 @@ public class EmployeeController extends BaseController {
 			employee.setRole(isEmpty(role) ? null : Role.valueOf(role));
 			employee.setEmail(email);
 			employee.setPhone(phone);
+			employee.setRegistrationDate(DateUtils.stringToDate(registrationDate));
+			employee.setRetireDate(DateUtils.stringToDate(retireDate));
 		
 			employeeService().save(employee);
 			

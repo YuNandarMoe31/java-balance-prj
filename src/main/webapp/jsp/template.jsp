@@ -29,8 +29,10 @@
 				<a href="<%=getPath("/employee/home") %>" class='<%=getActiveClass(request, "home") %>'>Home</a>
 				<a href="<%=getPath("/employee/transaction/search?type=Income") %>" class='<%=getActiveClass(request, "incomes") %>'>Incomes</a>
 				<a href="<%=getPath("/employee/transaction/search?type=Expense") %>" class='<%=getActiveClass(request, "expenses") %>'>Expenses</a>
-				<a href="<%=getPath("/manager/balance") %>" class='<%=getActiveClass(request, "reports") %>'>Balance Report</a> 
-				<a href="<%=getPath("/manager/employee/search") %>" class='<%=getActiveClass(request, "employees") %>'>Employee</a> 
+				<% if(loginInfo.isManager()) { %>
+					<a href="<%=getPath("/manager/balance") %>" class='<%=getActiveClass(request, "reports") %>'>Balance Report</a> 
+					<a href="<%=getPath("/manager/employee/search") %>" class='<%=getActiveClass(request, "employees") %>'>Employee</a> 
+				<% }%>
 				<a href="<%=getPath("/logout")%>">Logout</a>
 			</nav>
 		</header>
@@ -40,8 +42,12 @@
 				<img class="profile-img" src="<%=getPath("/assets/images/img_profile_male.png") %>" alt="Profile Image">
 				<!-- User Information -->
 				<ul class="user-info">
-					<li class="user-name">Mg Mg</li>
-					<li class="user-role">Manager</li>
+					<li class="user-name">
+						<jsp:getProperty property="name" name="loginInfo"/>
+					</li>
+					<li class="user-role">
+						<jsp:getProperty property="role" name="loginInfo"/>
+					</li>
 					<li class="user-actions">
 						<a href="#">Upload Photo</a>
 						<a href="<%=getPath("/employee/edit-profile") %>">Edit Profile</a>

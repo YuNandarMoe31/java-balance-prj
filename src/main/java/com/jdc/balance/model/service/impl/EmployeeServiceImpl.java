@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -46,10 +46,19 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 		if (null == employee) {
 			throw new BalanceBusinessException("Please check your login id");
 		}
+		
 		if (!pass.equals(employee.getPassword())) {
 			throw new BalanceBusinessException("Please check your password");
 		}
-		// TODO Check Registration & Retire Date
+		
+		if(LocalDate.now().compareTo(employee.getRegistrationDate()) < 0) {
+			throw new BalanceBusinessException("You can't use this system not yet");
+		}
+		
+		if(null != employee.getRetireDate() && LocalDate.now().compareTo(employee.getRetireDate()) > 0) {
+			throw new BalanceBusinessException("You are retired from this system");
+		}
+		
 		return employee;
 	}
 
@@ -81,7 +90,7 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 			throw new BalanceBusinessException("Please enter registration date");
 		}
 
-		if (null == emp.getCode()) {
+		if (null == emp.getCode() || emp.getCode().isEmpty()) {
 			emp.setPassword(emp.getEmail());
 			return repo.create(emp);
 		}
@@ -118,7 +127,7 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 			manager.setName("Manager");
 			manager.setEmail("manager@gmail.com");
 			manager.setPhone("0923456543");
-			manager.setRegistrationDate(new Date());
+			manager.setRegistrationDate(LocalDate.now());
 
 			save(manager);
 		}

@@ -1,6 +1,10 @@
 package com.jdc.balance;
 
+import java.time.LocalDate;
+
 import org.apache.jasper.runtime.HttpJspBase;
+
+import com.jdc.balance.utils.DateUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -22,5 +26,9 @@ public abstract class BaseView extends HttpJspBase {
 			return "selected='selected'";
 		}
 		return "";
+	}
+	
+	protected String getDateString(LocalDate date) {
+		return DateUtils.dateToString(date);
 	}
 }

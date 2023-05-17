@@ -26,4 +26,18 @@ public class LoginUser implements Serializable {
 	public void login(Employee employee) {
 		this.employee = employee;
 	}
+	
+	public String getName() {
+		if(null != employee) {
+			return employee.getName();
+		}
+		return "";
+	}
+	
+	public String getRole() {
+		if(null != employee) {
+			return employee.getRole().name();
+		}
+		return "";
+	}
 }
