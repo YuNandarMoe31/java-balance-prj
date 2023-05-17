@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.jdc.balance.BaseController;
 import com.jdc.balance.Destination;
+import com.jdc.balance.model.domain.Employee.Role;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,7 +28,13 @@ public class EmployeeController extends BaseController {
 	}
 
 	private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Employee Search Action
+		// Employee Search Action
+		var role = req.getParameter("role");
+		var name = req.getParameter("name");	
+		
+		var list = employeeService().search(role == null || role.isEmpty() ? null : Role.valueOf(role), name);
+		req.setAttribute("list", list);
+		
 		navigate(new Destination.Builder()
 			.req(req).resp(resp)
 			.view("manager/employees")

@@ -1,23 +1,25 @@
+<%@page import="com.jdc.balance.model.domain.Employee"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <div class="list-content">
 	<form class="form-inline">
 		<div class="form-group">
-			<label>Role</label> 
-			<select name="role">
-				<option value="All">All</option>
-				<option value="Employee">Employee</option>
-				<option value="Manager">Manager</option>
+			<label>Role</label> <select name="role">
+				<option value="">All</option>
+				<option <%=getSelectOption(request, "role", "Employee")%> value="Employee">Employee</option>
+				<option <%=getSelectOption(request, "role", "Manager")%> value="Manager">Manager</option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<label>Name</label> 
-			<input type="text" name="name" placeholder="Search Name">
+			<input type="text" name="name" value="<%=request.getParameter("name") == null ? "" : request.getParameter("name") %>"
+				placeholder="Search Name">
 		</div>
-		
-		<button class="btn">Search</button>
-        <a href="<%=getPath("/manager/employee/edit") %>" class="btn">Add New</a>
+
+		<button type="submit" class="btn">Search</button>
+		<a href="<%=getPath("/manager/employee/edit")%>" class="btn">Add
+			New</a>
 	</form>
 	<table class="employee-list">
 		<thead>
@@ -32,23 +34,39 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% for(int i=0; i<10; i++) { %> 
-           <tr>
-                <td>EMP001</td>
-                <td>Mg Mg</td>
-                <td>Manager</td>
-                <td>mgmg@gmail.com </td>
-                <td>091234564</td>
-                <td>2018-01-01</td>
-                <td></td>
-           </tr>
-           <% } %>
+			<jsp:useBean id="list" scope="request"
+				type="java.util.List<com.jdc.balance.model.domain.Employee>"></jsp:useBean>
+			<%
+			for (Employee emp : list) {
+			%>
+			<tr>
+				<td><%=emp.getCode()%></td>
+				<td><%=emp.getName()%></td>
+				<td><%=emp.getRole()%></td>
+				<td><%=emp.getEmail()%></td>
+				<td><%=emp.getPhone()%></td>
+				<td><%=emp.getRegistrationDate()%></td>
+				<td><%=emp.getRetireDate()%></td>
+			</tr>
+
+			<%
+			}
+			%>
 		</tbody>
 	</table>
 
 	<!-- To Get Absolute Path -->
-	<%!
-		String getPath(String path) {
-			return getServletContext().getContextPath().concat(path);
+	<%!String getPath(String path) {
+		return getServletContext().getContextPath().concat(path);
 	}%>
+	
+	<%!String getSelectOption(HttpServletRequest req, String name, String value) {
+		String requestValue = req.getParameter(name);
+		if(null != requestValue && requestValue.equals(value)) {
+			return "selected='selected'";
+		}
+		return "";
+	}
+	%>
+	
 </div>

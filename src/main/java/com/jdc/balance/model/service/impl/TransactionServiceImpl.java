@@ -3,6 +3,7 @@ package com.jdc.balance.model.service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
@@ -100,7 +101,7 @@ public class TransactionServiceImpl implements TransactionService, LifeCycle {
 
 	@Override
 	public void load() {
-		try(var input = new ObjectInputStream(new FileInputStream(new File(storage, FILE_NAME)))) {
+		try(var input = new ObjectInputStream(new FileInputStream(getDataFile()))) {
 			var object = input.readObject();
 			
 			if(null != object) {
@@ -113,10 +114,22 @@ public class TransactionServiceImpl implements TransactionService, LifeCycle {
 
 	@Override
 	public void save() {
-		try(var output = new ObjectOutputStream(new FileOutputStream(new File(storage, FILE_NAME)))) {
+		try(var output = new ObjectOutputStream(new FileOutputStream(getDataFile()))) {
 			output.writeObject(repo);
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}
+	}
+	
+	private File getDataFile() throws IOException {
+		var file = new File(storage, FILE_NAME);
+		if(!file.exists()) {
+			var fileStorage = new File(storage);
+			if(fileStorage.exists()) {
+				fileStorage.mkdir();
+			}
+			file.createNewFile();
+		}
+		return file;
 	}
 }
