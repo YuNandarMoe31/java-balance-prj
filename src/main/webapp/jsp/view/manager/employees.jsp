@@ -1,6 +1,7 @@
 <%@page import="com.jdc.balance.model.domain.Employee"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page extends="com.jdc.balance.BaseView" %>
 <div class="list-content">
 	<form class="form-inline">
 		<div class="form-group">
@@ -54,19 +55,5 @@
 			%>
 		</tbody>
 	</table>
-
-	<!-- To Get Absolute Path -->
-	<%!String getPath(String path) {
-		return getServletContext().getContextPath().concat(path);
-	}%>
-	
-	<%!String getSelectOption(HttpServletRequest req, String name, String value) {
-		String requestValue = req.getParameter(name);
-		if(null != requestValue && requestValue.equals(value)) {
-			return "selected='selected'";
-		}
-		return "";
-	}
-	%>
 	
 </div>

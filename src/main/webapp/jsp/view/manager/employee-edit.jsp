@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page extends="com.jdc.balance.BaseView" %>
 <div class="view-content">
 	<form method="post" class="card-form">
 		<div class="employee-edit row">
