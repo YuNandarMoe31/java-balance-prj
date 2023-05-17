@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.jdc.balance.BaseController;
 import com.jdc.balance.Destination;
+import com.jdc.balance.model.domain.Employee;
 import com.jdc.balance.model.domain.Employee.Role;
 
 import jakarta.servlet.ServletException;
@@ -45,10 +46,35 @@ public class EmployeeController extends BaseController {
 
 	private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if(isPostRequest(req)) {
-			// TODO Employee Save Action
+			// Employee Save Action
+			var code = req.getParameter("code");
+			var name = req.getParameter("name");
+			var role = req.getParameter("role");
+			var email = req.getParameter("email");
+			var phone = req.getParameter("phone");
+			var registrationDate = req.getParameter("registrationDate");
+			var retireDate = req.getParameter("retireDate");
+			
+			var employee = new Employee();
+			employee.setCode(code);
+			employee.setName(name);
+			employee.setRole(isEmpty(role) ? null : Role.valueOf(role));
+			employee.setEmail(email);
+			employee.setPhone(phone);
+		
+			employeeService().save(employee);
+			
 			redirect(resp, "/manager/employee/search");
 		} else {
-			var action = req.getParameter("id") == null ? "Add New Employee" : "Edit Employee";
+			var code = req.getParameter("code");
+			var action = "Add New Employee";
+			
+			if(null != code) {
+				action = "Edit Employee";
+				var employee = employeeService().findByCode(code);
+				req.setAttribute("employee", employee);
+			} 
+			
 			// TODO Employee Edit Action
 			navigate(new Destination.Builder()
 				.req(req).resp(resp)

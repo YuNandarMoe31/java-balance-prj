@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="form-group">
 				<label>Entry Date</label> 
-				<input type="date" name="entryDate" placeholder="Entry Date">
+				<input type="date" name="registrationDate" placeholder="Entry Date">
 			</div>
 		
 			<div class="form-group">
