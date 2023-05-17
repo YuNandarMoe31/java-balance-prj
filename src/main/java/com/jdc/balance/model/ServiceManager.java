@@ -26,7 +26,7 @@ public class ServiceManager implements ServletContextListener {
 
 		// Add to Application Scope
 		sce.getServletContext().setAttribute(EMPLOYEE_KEY, employees);
-		sce.getServletContext().setAttribute(EMPLOYEE_KEY, transactions);
+		sce.getServletContext().setAttribute(TRANSACTION_KEY, transactions);
 	}
 
 	@Override

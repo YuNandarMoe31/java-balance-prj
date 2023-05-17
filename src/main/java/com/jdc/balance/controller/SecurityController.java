@@ -26,11 +26,14 @@ public class SecurityController extends BaseController {
 
 	private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		if (isPostRequest(req)) {
-			// TODO Login Action
-			var loginInfo = getLoginInfo(req);
-
-			loginInfo.setLogin(true);
-
+			// Login Action
+			var loginId = req.getParameter("loginId");
+			var password = req.getParameter("password");
+			
+			var employee = userService().login(loginId, password);
+			
+			getLoginInfo(req).login(employee);
+			
 			redirect(resp, "/employee/home");
 		} else {
 			navigate(new Destination.Builder()

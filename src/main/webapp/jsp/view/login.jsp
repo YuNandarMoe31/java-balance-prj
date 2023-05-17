@@ -5,13 +5,13 @@
 	<div class="card-inner">
 		<h3 class="card-title">Member Login</h3>
 		<form action="login" method="post" class="card-form">
-			<!-- Email Address -->
-			<label>Email</label> 
-			<input type="email" placeholder="Enter Email Address" required>
+			<!-- Employee Code -->
+			<label>Login Id</label> 
+			<input name="loginId" placeholder="Enter Employee Code" required>
 
 			<!-- Password -->
 			<label>Password</label> 
-			<input type="password" placeholder="Enter Password" required>
+			<input name="password" type="password" placeholder="Enter Password" required>
 
 			<!-- Login Button -->
 			<button type="submit">Login</button>

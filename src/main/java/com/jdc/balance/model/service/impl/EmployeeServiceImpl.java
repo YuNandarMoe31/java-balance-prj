@@ -101,33 +101,33 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 
 	@Override
 	public void load() {
-		try(var input = new ObjectInputStream(new FileInputStream(new File(storage, FILE_NAME)))) {
+		try (var input = new ObjectInputStream(new FileInputStream(new File(storage, FILE_NAME)))) {
 			var object = input.readObject();
-			
-			if(null != object) {
+
+			if (null != object) {
 				repo = (EmployeeRepo) object;
 			}
-			
-			if(repo.employeeCount() == 0) {
-				var manager = new Employee();
-				manager.setRole(Role.Manager);
-				manager.setName("Manager");
-				manager.setEmail("manager@gmail.com");
-				manager.setPhone("0923456543");
-				manager.setRegistrationDate(new Date());
-				
-				repo.create(manager);
-			}
-		} catch (Exception e) {			
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
+		if (repo.employeeCount() == 0) {
+			var manager = new Employee();
+			manager.setRole(Role.Manager);
+			manager.setName("Manager");
+			manager.setEmail("manager@gmail.com");
+			manager.setPhone("0923456543");
+			manager.setRegistrationDate(new Date());
+
+			save(manager);
+		}
 	}
 
 	@Override
 	public void save() {
-		try(var output = new ObjectOutputStream(new FileOutputStream(new File(storage, FILE_NAME)))) {
+		try (var output = new ObjectOutputStream(new FileOutputStream(new File(storage, FILE_NAME)))) {
 			output.writeObject(repo);
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
