@@ -252,7 +252,7 @@ header>nav a.active {
 	margin-top: 18px;
 }
 
-.list-content .btn {
+.btn {
 	border: none;
 	border-radius: 5px;
 	padding: 8px 10px;
@@ -263,8 +263,13 @@ header>nav a.active {
 	cursor: pointer;
 }
 
-.list-content .btn:hover {
+.btn:hover {
 	background-color: #EDE8BB;
+}
+
+.btn-gp {
+	display: flex;
+	
 }
 
 .employee-list {

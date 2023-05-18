@@ -35,4 +35,8 @@ public abstract class BaseView extends HttpJspBase {
 	protected String getDateString(LocalDate date) {
 		return DateUtils.dateToString(date);
 	}
+	
+	protected String getProperty(String value) {
+		return null == value ? "" : value;
+	}
 }

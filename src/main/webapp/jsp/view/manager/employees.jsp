@@ -37,6 +37,7 @@
 				<th>Phone</th>
 				<th>Registration</th>
 				<th>Retire</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,6 +51,11 @@
 				<td><%=emp.getPhone()%></td>
 				<td><%=getDateString(emp.getRegistrationDate())%></td>
 				<td><%=getDateString(emp.getRetireDate())%></td>
+				<td>
+					<a href="<%=getPath("/manager/employee/edit?code=" + emp.getCode()) %>" >
+						<img src="<%=getSvg("pencil") %>" alt="Login" class="icon icn-svg" />			
+					</a>
+				</td>
 			</tr>
 			<%
 			}

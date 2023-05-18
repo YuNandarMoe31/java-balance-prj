@@ -57,6 +57,11 @@ public class EmployeeController extends BaseController {
 			var retireDate = req.getParameter("retireDate");
 			
 			var employee = new Employee();
+			
+			if(null != code && !code.isEmpty()) {
+				employee = employeeService().findByCode(code);
+			}
+			
 			employee.setCode(code);
 			employee.setName(name);
 			employee.setRole(isEmpty(role) ? null : Role.valueOf(role));
@@ -78,7 +83,6 @@ public class EmployeeController extends BaseController {
 				req.setAttribute("employee", employee);
 			} 
 			
-			// TODO Employee Edit Action
 			navigate(new Destination.Builder()
 				.req(req).resp(resp)
 				.view("manager/employee-edit")
