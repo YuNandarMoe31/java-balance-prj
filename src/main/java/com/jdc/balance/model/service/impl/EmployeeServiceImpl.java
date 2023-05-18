@@ -3,8 +3,10 @@ package com.jdc.balance.model.service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -44,10 +46,19 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 		if (null == employee) {
 			throw new BalanceBusinessException("Please check your login id");
 		}
+		
 		if (!pass.equals(employee.getPassword())) {
 			throw new BalanceBusinessException("Please check your password");
 		}
-		// TODO Check Registration & Retire Date
+		
+		if(LocalDate.now().compareTo(employee.getRegistrationDate()) < 0) {
+			throw new BalanceBusinessException("You can't use this system not yet");
+		}
+		
+		if(null != employee.getRetireDate() && LocalDate.now().compareTo(employee.getRetireDate()) > 0) {
+			throw new BalanceBusinessException("You are retired from this system");
+		}
+		
 		return employee;
 	}
 
@@ -79,7 +90,7 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 			throw new BalanceBusinessException("Please enter registration date");
 		}
 
-		if (null == emp.getCode()) {
+		if (null == emp.getCode() || emp.getCode().isEmpty()) {
 			emp.setPassword(emp.getEmail());
 			return repo.create(emp);
 		}
@@ -100,23 +111,46 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 
 	@Override
 	public void load() {
-		try(var input = new ObjectInputStream(new FileInputStream(new File(storage, FILE_NAME)))) {
+		try (var input = new ObjectInputStream(new FileInputStream(getDataFile()))) {
 			var object = input.readObject();
-			
-			if(null != object) {
+
+			if (null != object) {
 				repo = (EmployeeRepo) object;
 			}
-		} catch (Exception e) {			
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
+		if (repo.employeeCount() == 0) {
+			var manager = new Employee();
+			manager.setRole(Role.Manager);
+			manager.setName("Manager");
+			manager.setEmail("manager@gmail.com");
+			manager.setPhone("0923456543");
+			manager.setRegistrationDate(LocalDate.now());
+
+			save(manager);
+		}
 	}
 
 	@Override
 	public void save() {
-		try(var output = new ObjectOutputStream(new FileOutputStream(new File(storage, FILE_NAME)))) {
+		try (var output = new ObjectOutputStream(new FileOutputStream(getDataFile()))) {
 			output.writeObject(repo);
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private File getDataFile() throws IOException {
+		var file = new File(storage, FILE_NAME);
+		if(!file.exists()) {
+			var fileStorage = new File(storage);
+			if(fileStorage.exists()) {
+				fileStorage.mkdir();
+			}
+			file.createNewFile();
+		}
+		return file;
 	}
 }

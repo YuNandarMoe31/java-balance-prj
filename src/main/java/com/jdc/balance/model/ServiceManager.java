@@ -1,6 +1,5 @@
 package com.jdc.balance.model;
 
-import com.jdc.balance.model.domain.Transaction;
 import com.jdc.balance.model.service.impl.EmployeeServiceImpl;
 import com.jdc.balance.model.service.impl.TransactionServiceImpl;
 
@@ -27,7 +26,7 @@ public class ServiceManager implements ServletContextListener {
 
 		// Add to Application Scope
 		sce.getServletContext().setAttribute(EMPLOYEE_KEY, employees);
-		sce.getServletContext().setAttribute(EMPLOYEE_KEY, transactions);
+		sce.getServletContext().setAttribute(TRANSACTION_KEY, transactions);
 	}
 
 	@Override

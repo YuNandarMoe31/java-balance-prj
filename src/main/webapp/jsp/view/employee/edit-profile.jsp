@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page extends="com.jdc.balance.BaseView" %>
 <div class="view-content">
 	<form method="post" class="card-form">
 		<label>Employee Code</label> 
@@ -14,6 +15,9 @@
 		<label>Phone Number</label> 
 		<input type="number" name="phone" placeholder="Enter Your Phone Number">
 
-		<button type="submit">Save</button>
+		<button type="submit" class="icn-txt">
+			<img src="<%=getSvg("floppy-disk") %>" alt="Login" class="icon icn-svg" />
+			Save
+		</button>
 	</form>
 </div>

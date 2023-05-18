@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ page extends="com.jdc.balance.BaseView" %>
 <div class="list-content">
 	<form class="form-inline">
 		<div class="form-group">
@@ -18,8 +19,14 @@
 		</div>
 		
 		
-		<button class="btn">Search</button>
-		<a href="<%=getPath("/employee/transaction/edit") %>" class="btn">Add New</a>
+		<button class="btn icn-txt">
+			<img src="<%=getSvg("search") %>" alt="Login" class="icon icn-svg" />
+			Search
+		</button>
+		<a href="<%=getPath("/employee/transaction/edit") %>" class="btn icn-txt">
+			<img src="<%=getSvg("plus") %>" alt="Login" class="icon icn-svg2" />
+			Add New
+		</a>
 	</form>
 	
 	<table class="employee-list">
@@ -48,10 +55,5 @@
            <% } %>
 		</tbody>
 	</table>
-	
-	<!-- To Get Absolute Path -->
-	<%!
-		String getPath(String path) {
-			return getServletContext().getContextPath().concat(path);
-	}%>
+
 </div>

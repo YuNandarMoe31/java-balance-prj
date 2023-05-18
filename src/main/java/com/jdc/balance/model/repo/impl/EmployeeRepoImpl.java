@@ -44,4 +44,9 @@ public class EmployeeRepoImpl implements EmployeeRepo, Serializable{
 	public Employee findByCode(String code) {
 		return domain.get(code);
 	}
+
+	@Override
+	public int employeeCount() {
+		return domain.size();
+	}
 }

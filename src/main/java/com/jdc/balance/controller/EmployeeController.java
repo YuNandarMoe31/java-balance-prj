@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import com.jdc.balance.BaseController;
 import com.jdc.balance.Destination;
+import com.jdc.balance.model.domain.Employee;
+import com.jdc.balance.model.domain.Employee.Role;
+import com.jdc.balance.utils.DateUtils;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,7 +30,13 @@ public class EmployeeController extends BaseController {
 	}
 
 	private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Employee Search Action
+		// Employee Search Action
+		var role = req.getParameter("role");
+		var name = req.getParameter("name");	
+		
+		var list = employeeService().search(role == null || role.isEmpty() ? null : Role.valueOf(role), name);
+		req.setAttribute("list", list);
+		
 		navigate(new Destination.Builder()
 			.req(req).resp(resp)
 			.view("manager/employees")
@@ -38,11 +47,42 @@ public class EmployeeController extends BaseController {
 
 	private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		if(isPostRequest(req)) {
-			// TODO Employee Save Action
+			// Employee Save Action
+			var code = req.getParameter("code");
+			var name = req.getParameter("name");
+			var role = req.getParameter("role");
+			var email = req.getParameter("email");
+			var phone = req.getParameter("phone");
+			var registrationDate = req.getParameter("registrationDate");
+			var retireDate = req.getParameter("retireDate");
+			
+			var employee = new Employee();
+			
+			if(null != code && !code.isEmpty()) {
+				employee = employeeService().findByCode(code);
+			}
+			
+			employee.setCode(code);
+			employee.setName(name);
+			employee.setRole(isEmpty(role) ? null : Role.valueOf(role));
+			employee.setEmail(email);
+			employee.setPhone(phone);
+			employee.setRegistrationDate(DateUtils.stringToDate(registrationDate));
+			employee.setRetireDate(DateUtils.stringToDate(retireDate));
+		
+			employeeService().save(employee);
+			
 			redirect(resp, "/manager/employee/search");
 		} else {
-			var action = req.getParameter("id") == null ? "Add New Employee" : "Edit Employee";
-			// TODO Employee Edit Action
+			var code = req.getParameter("code");
+			var action = "Add New Employee";
+			
+			if(null != code) {
+				action = "Edit Employee";
+				var employee = employeeService().findByCode(code);
+				req.setAttribute("employee", employee);
+			} 
+			
 			navigate(new Destination.Builder()
 				.req(req).resp(resp)
 				.view("manager/employee-edit")

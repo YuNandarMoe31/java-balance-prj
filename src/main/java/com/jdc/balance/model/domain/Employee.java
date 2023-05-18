@@ -1,7 +1,7 @@
 package com.jdc.balance.model.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Employee implements Serializable {
 
@@ -17,9 +17,9 @@ public class Employee implements Serializable {
 
 	private String password;
 
-	private Date registrationDate;
+	private LocalDate registrationDate;
 
-	private Date retireDate;
+	private LocalDate retireDate;
 
 	private Role role;
 
@@ -67,19 +67,19 @@ public class Employee implements Serializable {
 		this.password = password;
 	}
 
-	public Date getRegistrationDate() {
+	public LocalDate getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
-	public Date getRetireDate() {
+	public LocalDate getRetireDate() {
 		return retireDate;
 	}
 
-	public void setRetireDate(Date retireDate) {
+	public void setRetireDate(LocalDate retireDate) {
 		this.retireDate = retireDate;
 	}
 

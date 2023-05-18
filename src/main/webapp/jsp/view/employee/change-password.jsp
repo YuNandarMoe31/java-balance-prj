@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page extends="com.jdc.balance.BaseView" %>
 <div class="view-content">
 	<form method="post" class="card-form">
 		<label>Original Password</label> 
@@ -11,6 +12,9 @@
 		<label>Confirm Password</label> 
 		<input type="password" name="confirm-pass" placeholder="Enter New Password Again">
 		
-		<button type="submit">Save</button>
+		<button type="submit" class="icn-txt">
+			<img src="<%=getSvg("floppy-disk") %>" alt="Login" class="icon icn-svg" />		
+			Save
+		</button>
 	</form>
 </div>
