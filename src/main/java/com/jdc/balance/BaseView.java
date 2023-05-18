@@ -15,6 +15,10 @@ public abstract class BaseView extends HttpJspBase {
 	protected String getPath(String path) {
 		return getServletContext().getContextPath().concat(path);
 	}
+	
+	protected String getSvg(String name) {
+		return String.format("%s/assets/svg/%s.svg", getServletContext().getContextPath(), name);
+	}
 
 	protected String getActiveClass(HttpServletRequest req, String menu) {
 		return req.getAttribute("active-menu").equals(menu) ? "active" : "";

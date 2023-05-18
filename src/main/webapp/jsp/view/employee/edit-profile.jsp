@@ -15,6 +15,9 @@
 		<label>Phone Number</label> 
 		<input type="number" name="phone" placeholder="Enter Your Phone Number">
 
-		<button type="submit">Save</button>
+		<button type="submit" class="icn-txt">
+			<img src="<%=getSvg("floppy-disk") %>" alt="Login" class="icon icn-svg" />
+			Save
+		</button>
 	</form>
 </div>

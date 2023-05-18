@@ -18,9 +18,14 @@
 				placeholder="Search Name">
 		</div>
 
-		<button type="submit" class="btn">Search</button>
-		<a href="<%=getPath("/manager/employee/edit")%>" class="btn">Add
-			New</a>
+		<button type="submit" class="btn icn-txt">
+			<img src="<%=getSvg("search") %>" alt="Login" class="icon icn-svg" />
+			Search
+		</button>
+		<a href="<%=getPath("/manager/employee/edit")%>" class="btn icn-txt">
+			<img src="<%=getSvg("user-plus") %>" alt="Login" class="icon icn-svg" />
+			Add New
+		</a>
 	</form>
 	<table class="employee-list">
 		<thead>

@@ -19,8 +19,14 @@
 		</div>
 		
 		
-		<button class="btn">Search</button>
-		<a href="<%=getPath("/employee/transaction/edit") %>" class="btn">Add New</a>
+		<button class="btn icn-txt">
+			<img src="<%=getSvg("search") %>" alt="Login" class="icon icn-svg" />
+			Search
+		</button>
+		<a href="<%=getPath("/employee/transaction/edit") %>" class="btn icn-txt">
+			<img src="<%=getSvg("plus") %>" alt="Login" class="icon icn-svg2" />
+			Add New
+		</a>
 	</form>
 	
 	<table class="employee-list">

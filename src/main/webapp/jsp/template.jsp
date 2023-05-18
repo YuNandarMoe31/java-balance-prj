@@ -26,14 +26,32 @@
 			</h1>
 
 			<nav>
-				<a href="<%=getPath("/employee/home") %>" class='<%=getActiveClass(request, "home") %>'>Home</a>
-				<a href="<%=getPath("/employee/transaction/search?type=Income") %>" class='<%=getActiveClass(request, "incomes") %>'>Incomes</a>
-				<a href="<%=getPath("/employee/transaction/search?type=Expense") %>" class='<%=getActiveClass(request, "expenses") %>'>Expenses</a>
+				<a href="<%=getPath("/employee/home") %>" class='<%=getActiveClass(request, "home") %>'>
+					<img src="<%=getSvg("home") %>" alt="Login" class="icon icn-svg" />
+					Home
+				</a>
+				<a href="<%=getPath("/employee/transaction/search?type=Income") %>" class='<%=getActiveClass(request, "incomes") %>'>
+					<img src="<%=getSvg("folder-plus") %>" alt="Login" class="icon icn-svg" />
+					Incomes
+				</a>
+				<a href="<%=getPath("/employee/transaction/search?type=Expense") %>" class='<%=getActiveClass(request, "expenses") %>'>
+					<img src="<%=getSvg("folder-minus") %>" alt="Login" class="icon icn-svg" />
+					Expenses
+				</a>
 				<% if(loginInfo.isManager()) { %>
-					<a href="<%=getPath("/manager/balance") %>" class='<%=getActiveClass(request, "reports") %>'>Balance Report</a> 
-					<a href="<%=getPath("/manager/employee/search") %>" class='<%=getActiveClass(request, "employees") %>'>Employee</a> 
+					<a href="<%=getPath("/manager/balance") %>" class='<%=getActiveClass(request, "reports") %>'>
+						<img src="<%=getSvg("stats-dots") %>" alt="Login" class="icon icn-svg" />
+						Balance Report
+				</a> 
+					<a href="<%=getPath("/manager/employee/search") %>" class='<%=getActiveClass(request, "employees") %>'>
+						<img src="<%=getSvg("users") %>" alt="Login" class="icon icn-svg" />
+						Employee
+				</a> 
 				<% }%>
-				<a href="<%=getPath("/logout")%>">Logout</a>
+				<a href="<%=getPath("/logout")%>">
+					<img src="<%=getSvg("exit") %>" alt="Login" class="icon icn-svg" />
+					Logout
+				</a>
 			</nav>
 		</header>
 		<div class="content-container">
@@ -49,9 +67,18 @@
 						<jsp:getProperty property="role" name="loginInfo"/>
 					</li>
 					<li class="user-actions">
-						<a href="#">Upload Photo</a>
-						<a href="<%=getPath("/employee/edit-profile") %>">Edit Profile</a>
-						<a href="<%=getPath("/employee/change-pass") %>">Change Password</a>
+						<a href="#" class="icn-txt">
+							<img src="<%=getSvg("upload") %>" alt="Login" class="icon icn-svg2" />	
+							Upload Photo
+						</a>
+						<a href="<%=getPath("/employee/edit-profile") %>" class="icn-txt">
+							<img src="<%=getSvg("pencil") %>" alt="Login" class="icon icn-svg2" />	
+							Edit Profile
+						</a>
+						<a href="<%=getPath("/employee/change-pass") %>" class="icn-txt">
+							<img src="<%=getSvg("key") %>" alt="Login" class="icon icn-svg2" />						
+							Change Password
+						</a>
 					</li>
 				</ul>			
 				<!-- User Menu -->

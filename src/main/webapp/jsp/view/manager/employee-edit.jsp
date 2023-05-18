@@ -6,7 +6,7 @@
 		<div class="employee-edit row">
 			<div class="form-edit">
 				<label>Employee Code</label> 
-				<input type="text" name="code" value="EMP001" readonly="readonly">
+				<input type="text" name="code" readonly="readonly" placeholder="EMP***">
 			</div>
 			
 			<div class="form-group">
@@ -40,6 +40,9 @@
 			</div>
 		</div>
 		
-		<button type="submit">Save</button>
+		<button type="submit" class="icn-txt">
+			<img src="<%=getSvg("floppy-disk") %>" alt="Login" class="icon icn-svg" />
+			Save
+		</button>
 	</form>
 </div>

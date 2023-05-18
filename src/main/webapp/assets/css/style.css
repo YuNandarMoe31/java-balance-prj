@@ -172,7 +172,6 @@ header>nav a.active {
 
 .user-actions>a:hover {
 	background-color: #EDE8BB;
-	color: #fff;
 }
 
 .view-title {
@@ -266,7 +265,6 @@ header>nav a.active {
 
 .list-content .btn:hover {
 	background-color: #EDE8BB;
-	color: #fff;
 }
 
 .employee-list {
@@ -334,4 +332,22 @@ header>nav a.active {
 
 .transaction-page input[type=number]::placeholder {
 	text-align: right;
+}
+
+/* Icon */
+.icn-txt {
+	display: flex;
+	justify-content: center;
+}
+
+.icon {
+	margin-right: 10px;
+}
+
+.icn-svg {
+	width: 15px;
+}
+
+.icn-svg2 {
+	width: 12px;
 }
