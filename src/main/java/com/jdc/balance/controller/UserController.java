@@ -53,16 +53,31 @@ public class UserController extends BaseController {
 	}
 	
 	private void editProfile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		if(isPostRequest(req)) {
-			// TODO Save Profile
-			redirect(resp, "/employee/home");
-		} else {
-			navigate(new Destination.Builder()
+		var editView = new Destination.Builder()
 				.req(req).resp(resp)
 				.view("employee/edit-profile")
 				.pageTitle("Profile")
 				.viewTitle("Edit Profile")
-				.activeMenu("home").build());
+				.activeMenu("home").build();
+		
+		if(isPostRequest(req)) {
+			//  Save Profile
+			this.handleBusinessError(() -> {
+				var code = req.getParameter("code");
+				
+				var user = employeeService().findByCode(code);
+				user.setName(req.getParameter("name"));
+				user.setEmail(req.getParameter("email"));
+				user.setPhone(req.getParameter("phone"));
+				
+				user = super.employeeService().save(user);
+				
+				this.getLoginInfo(req).login(user);
+				
+				redirect(resp, "/employee/home");
+			}, editView);
+		} else {
+			navigate(editView);
 		}
 	}
 }

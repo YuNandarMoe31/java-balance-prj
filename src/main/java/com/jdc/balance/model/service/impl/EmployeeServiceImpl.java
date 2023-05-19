@@ -72,17 +72,17 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 		// Validation
 		// Name
 		if (null == emp.getName() || emp.getName().isEmpty()) {
-			throw new BalanceBusinessException("Please enter employee name");
+			throw new BalanceBusinessException("Please enter name");
 		}
 
 		// Role
 		if (null == emp.getRole()) {
-			throw new BalanceBusinessException("Please set employee role");
+			throw new BalanceBusinessException("Please set role");
 		}
 
 		// Email
 		if (null == emp.getEmail() || emp.getEmail().isEmpty()) {
-			throw new BalanceBusinessException("Please enter employee email");
+			throw new BalanceBusinessException("Please enter email address");
 		}
 
 		// Registration Date

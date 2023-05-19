@@ -9,10 +9,7 @@
 		</h3>
 		
 		<!-- Error Message -->
-		<div class="error-txt">
-			<img src="<%=getSvg("notification") %>" alt="Login" class="icon icn-svg" />
-			<jsp:include page="/jsp/includes/error-message.jsp" />
-		</div>		
+		<jsp:include page="/jsp/includes/error-message.jsp" />	
 		
 		<form action="login" method="post" class="card-form">
 			<!-- Employee Code -->
