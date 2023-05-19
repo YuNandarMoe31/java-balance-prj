@@ -11,7 +11,7 @@
 		<!-- Error Message -->
 		<jsp:include page="/jsp/includes/error-message.jsp" />	
 		
-		<form action="login" method="post" class="card-form">
+		<form action="<%=getPath("/login") %>" method="post" class="card-form">
 			<!-- Employee Code -->
 			<label>Login Id</label> 
 			<input name="loginId" placeholder="Enter Employee Code" required>
