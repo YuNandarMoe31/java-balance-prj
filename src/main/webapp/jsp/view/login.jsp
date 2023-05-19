@@ -8,14 +8,11 @@
 			Member Login
 		</h3>
 		
-		<%
-			String message = (String)request.getAttribute("message");
-			if(null != message && !message.isEmpty()) {
-		%>
-			<p class="message"><%=message %></p>
-			
-		
-		<% } %>
+		<!-- Error Message -->
+		<div class="error-txt">
+			<img src="<%=getSvg("notification") %>" alt="Login" class="icon icn-svg" />
+			<jsp:include page="/jsp/includes/error-message.jsp" />
+		</div>		
 		
 		<form action="login" method="post" class="card-form">
 			<!-- Employee Code -->

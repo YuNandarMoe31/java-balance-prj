@@ -25,21 +25,29 @@ public class SecurityController extends BaseController {
 	}
 
 	private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		if (isPostRequest(req)) {
-			// Login Action
-			var loginId = req.getParameter("loginId");
-			var password = req.getParameter("password");
-			
-			var employee = userService().login(loginId, password);
-			
-			getLoginInfo(req).login(employee);
-			
-			redirect(resp, "/employee/home");
-		} else {
-			navigate(new Destination.Builder()
+		
+		// Login Destination
+		var loginPage = new Destination.Builder()
 				.req(req).resp(resp)
 				.view("login")
-				.pageTitle("Login").build());
+				.pageTitle("Login").build();
+		
+		
+		if (isPostRequest(req)) {			
+			handleBusinessError(() -> {
+				// Login Action
+				var loginId = req.getParameter("loginId");
+				var password = req.getParameter("password");
+				
+				var employee = userService().login(loginId, password);
+				
+				getLoginInfo(req).login(employee);
+				
+				redirect(resp, "/employee/home");
+				
+			}, loginPage);
+		} else {
+			navigate(loginPage);
 		}
 	}
 
