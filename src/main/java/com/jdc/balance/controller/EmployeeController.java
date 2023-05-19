@@ -1,5 +1,6 @@
 package com.jdc.balance.controller;
 
+import static com.jdc.balance.utils.StringUtils.*;
 import java.io.IOException;
 
 import com.jdc.balance.BaseController;
@@ -88,7 +89,7 @@ public class EmployeeController extends BaseController {
 				.view("manager/employee-edit")
 				.pageTitle(action)
 				.viewTitle(action)
-				.activeMenu("employees").build());	
+					.activeMenu("employees").build());
 		}
 	}
 }

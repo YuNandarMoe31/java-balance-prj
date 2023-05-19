@@ -85,11 +85,7 @@ public abstract class BaseController extends HttpServlet {
 	protected EmployeeService employeeService() {
 		return (EmployeeService) getServletContext().getAttribute(ServiceManager.EMPLOYEE_KEY);
 	}
-	
-	protected boolean isEmpty(String str) {
-		return null == str || str.isEmpty();
-	}
-	
+
 	protected interface Action {
 		void execute() throws IOException;
 	}
