@@ -39,30 +39,57 @@ public class UserController extends BaseController {
 	}
 
 	private void changePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		if(isPostRequest(req))	{
-			// TODO Save Password
-			redirect(resp, "/employee/home");
-		} else {			
-			navigate(new Destination.Builder()
+		var editPage = new Destination.Builder()
 				.req(req).resp(resp)
 				.view("employee/change-password")
 				.pageTitle("Password")
 				.viewTitle("Change Password")
-				.activeMenu("home").build());
+				.activeMenu("home").build();
+		
+		if(isPostRequest(req))	{
+			// Save Password
+			super.handleBusinessError(() -> {
+				var code = getLoginInfo(req).profile().getCode();
+				
+				super.userService().changePass(code, req.getParameter("old-pass"), req.getParameter("new-pass"), req.getParameter("confirm-pass"));
+				
+				var user = super.employeeService().findByCode(code);
+				
+				super.getLoginInfo(req).login(user);
+				
+				redirect(resp, "/employee/home");
+			}, editPage);			
+		} else {			
+			navigate(editPage);
 		}
 	}
 	
 	private void editProfile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		if(isPostRequest(req)) {
-			// TODO Save Profile
-			redirect(resp, "/employee/home");
-		} else {
-			navigate(new Destination.Builder()
+		var editView = new Destination.Builder()
 				.req(req).resp(resp)
 				.view("employee/edit-profile")
 				.pageTitle("Profile")
 				.viewTitle("Edit Profile")
-				.activeMenu("home").build());
+				.activeMenu("home").build();
+		
+		if(isPostRequest(req)) {
+			//  Save Profile
+			this.handleBusinessError(() -> {
+				var code = req.getParameter("code");
+				
+				var user = employeeService().findByCode(code);
+				user.setName(req.getParameter("name"));
+				user.setEmail(req.getParameter("email"));
+				user.setPhone(req.getParameter("phone"));
+				
+				user = super.employeeService().save(user);
+				
+				this.getLoginInfo(req).login(user);
+				
+				redirect(resp, "/employee/home");
+			}, editView);
+		} else {
+			navigate(editView);
 		}
 	}
 }

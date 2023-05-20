@@ -236,7 +236,7 @@ header>nav a.active {
 
 .row {
 	display: flex;
-    column-gap: 40px;
+	column-gap: 40px;
 }
 
 .employee-edit .form-edit {
@@ -269,7 +269,6 @@ header>nav a.active {
 
 .btn-gp {
 	display: flex;
-	
 }
 
 .employee-list {
@@ -324,7 +323,7 @@ header>nav a.active {
 .transaction-list .form-group {
 	display: flex;
 	margin-bottom: 10px;
-    align-items: center;
+	align-items: center;
 }
 
 .transaction-list .form-group label {
@@ -355,4 +354,16 @@ header>nav a.active {
 
 .icn-svg2 {
 	width: 12px;
+}
+
+/* Error Message */
+.message {
+	color: #da2828;
+	font-size: 13px;
+}
+
+.error-txt {
+	display: flex;
+	align-items: center;
+	padding-bottom: 10px;
 }

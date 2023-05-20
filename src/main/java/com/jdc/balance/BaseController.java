@@ -3,6 +3,7 @@ package com.jdc.balance;
 import java.io.IOException;
 
 import com.jdc.balance.model.ServiceManager;
+import com.jdc.balance.model.service.BalanceBusinessException;
 import com.jdc.balance.model.service.EmployeeService;
 import com.jdc.balance.model.service.TransactionService;
 import com.jdc.balance.model.service.UserService;
@@ -44,6 +45,16 @@ public abstract class BaseController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		process(req, resp, req.getServletPath());
 	}
+	
+	
+	protected void handleBusinessError(Action action, Destination errorDestination) throws ServletException, IOException {
+		try {
+			action.execute();
+		} catch (BalanceBusinessException e) {
+			errorDestination.getReq().setAttribute("message", e.getMessage());
+			navigate(errorDestination);
+		}
+	}
 
 	protected LoginUser getLoginInfo(HttpServletRequest req) {
 		LoginUser loginInfo = (LoginUser) req.getSession(true).getAttribute("loginInfo");
@@ -74,8 +85,8 @@ public abstract class BaseController extends HttpServlet {
 	protected EmployeeService employeeService() {
 		return (EmployeeService) getServletContext().getAttribute(ServiceManager.EMPLOYEE_KEY);
 	}
-	
-	protected boolean isEmpty(String str) {
-		return null == str || str.isEmpty();
+
+	protected interface Action {
+		void execute() throws IOException;
 	}
 }

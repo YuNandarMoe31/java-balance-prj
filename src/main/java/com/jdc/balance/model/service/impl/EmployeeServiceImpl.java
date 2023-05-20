@@ -31,11 +31,21 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 	}
 
 	@Override
-	public void changePass(String code, String oldPass, String newPass) {
+	public void changePass(String code, String oldPass, String newPass, String confPass) {
 		var employee = repo.findByCode(code);
+
 		if (!oldPass.equals(employee.getPassword())) {
 			throw new BalanceBusinessException("Please check your old password");
 		}
+		
+		if(oldPass.equals(newPass)) {
+			throw new BalanceBusinessException("Old password and New password are same passwords");
+		}
+		
+		if(!newPass.equals(confPass)) {
+			throw new BalanceBusinessException("Please check your confirm password");
+		}
+		
 		employee.setPassword(newPass);
 		repo.update(employee);
 	}
@@ -72,17 +82,22 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 		// Validation
 		// Name
 		if (null == emp.getName() || emp.getName().isEmpty()) {
-			throw new BalanceBusinessException("Please enter employee name");
+			throw new BalanceBusinessException("Please enter name");
 		}
 
 		// Role
 		if (null == emp.getRole()) {
-			throw new BalanceBusinessException("Please set employee role");
+			throw new BalanceBusinessException("Please set role");
 		}
 
 		// Email
 		if (null == emp.getEmail() || emp.getEmail().isEmpty()) {
-			throw new BalanceBusinessException("Please enter employee email");
+			throw new BalanceBusinessException("Please enter email address");
+		}
+		
+		// Phone
+		if (null == emp.getPhone() || emp.getPhone().isEmpty()) {
+			throw new BalanceBusinessException("Please enter phone number");
 		}
 
 		// Registration Date

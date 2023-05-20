@@ -3,7 +3,9 @@ package com.jdc.balance.model.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Employee implements Serializable {
+import com.jdc.balance.security.UserProfile;
+
+public class Employee implements UserProfile, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,7 +26,12 @@ public class Employee implements Serializable {
 	private Role role;
 
 	public enum Role {
-		Employee, Manager
+		Employee, Manager;
+		
+		public boolean match(String name) {
+			return this.name().equals(name);
+		}
+		
 	}
 
 	public String getCode() {
