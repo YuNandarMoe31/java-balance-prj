@@ -1,6 +1,8 @@
-package com.jdc.balance.security;
+package com.jdc.balance.security.filter;
 
 import java.io.IOException;
+
+import com.jdc.balance.security.LoginUser;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -10,20 +12,18 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 
-@WebFilter({
-	"/employee/*",
-	"/manager/*"
-})
+@WebFilter(filterName = "authFilter")
 public class AuthenticationFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		
-		var httpReq = (HttpServletRequest)request;
-		var session = httpReq.getSession(true);
-		
+
+		var session = ((HttpServletRequest) request).getSession();
 		var loginInfo = (LoginUser)session.getAttribute("loginInfo");
+
+		
+		System.out.println("Authentication Filter");
 		
 		if(null == loginInfo || !loginInfo.isLogin()) {
 			request.setAttribute("content", "/jsp/view/login.jsp");
