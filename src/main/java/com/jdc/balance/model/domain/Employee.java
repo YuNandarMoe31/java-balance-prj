@@ -26,7 +26,12 @@ public class Employee implements UserProfile, Serializable {
 	private Role role;
 
 	public enum Role {
-		Employee, Manager
+		Employee, Manager;
+		
+		public boolean match(String name) {
+			return this.name().equals(name);
+		}
+		
 	}
 
 	public String getCode() {

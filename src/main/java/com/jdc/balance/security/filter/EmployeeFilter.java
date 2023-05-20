@@ -2,7 +2,9 @@ package com.jdc.balance.security.filter;
 
 import java.io.IOException;
 
-import jakarta.servlet.Filter;
+import com.jdc.balance.model.domain.Employee.Role;
+import com.jdc.balance.security.LoginUser;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -10,13 +12,20 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 
 @WebFilter(filterName = "employeeFilter")
-public class EmployeeFilter implements Filter {
+public class EmployeeFilter extends SecurityFilter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("Employee Filter");
-		chain.doFilter(request, response);
+		LoginUser loginUser = loginInfo(request);
+		
+		if(Role.Employee.match(loginInfo(request).getRole())
+				|| Role.Manager.match(loginInfo(request).getRole())) {
+			chain.doFilter(request, response);
+		} else {
+			loginUser.logout();
+			navigateToLogin(request, response, "You have no authority to use employee function");
+		}
 	}
 
 }
