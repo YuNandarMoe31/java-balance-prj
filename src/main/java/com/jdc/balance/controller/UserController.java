@@ -13,7 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet({ 
 	"/employee/home", 
 	"/employee/change-pass", 
-	"/employee/edit-profile"
+	"/employee/edit-profile",
+	"/employee/upload-image"
 })
 public class UserController extends BaseController {
 
@@ -25,6 +26,7 @@ public class UserController extends BaseController {
 		case "/employee/home" -> loadHome(req, resp);
 		case "/employee/change-pass" -> changePassword(req, resp);
 		case "/employee/edit-profile" -> editProfile(req, resp);
+		case "/employee/upload-image" -> editProfile(req, resp);
 		}
 	}
 
@@ -36,6 +38,11 @@ public class UserController extends BaseController {
 			.pageTitle("Home")
 			.viewTitle("Dashboard")
 			.activeMenu("home").build());
+	}
+	
+	private void uploadProfileImage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// Upload Profile Image
+		redirect(resp, "/employee/home");
 	}
 
 	private void changePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

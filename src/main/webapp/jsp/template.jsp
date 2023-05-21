@@ -59,15 +59,15 @@
 				<!-- Profile Image -->
 				<img class="profile-img" src="<%=getPath("/assets/images/img_profile_male.png") %>" alt="Profile Image">
 				<!-- User Information -->
-				<ul class="user-info">
-					<li class="user-name">
+				<div class="user-info">
+					<div class="user-name">
 						<jsp:getProperty property="name" name="loginInfo"/>
-					</li>
-					<li class="user-role">
+					</div>
+					<div class="user-role">
 						<jsp:getProperty property="role" name="loginInfo"/>
-					</li>
-					<li class="user-actions">
-						<a href="#" class="icn-txt">
+					</div>
+					<div class="user-actions">
+						<a onclick="openUploadFile(); return false;" class="icn-txt">
 							<img src="<%=getSvg("upload") %>" alt="Login" class="icon icn-svg2" />	
 							Upload Photo
 						</a>
@@ -79,9 +79,12 @@
 							<img src="<%=getSvg("key") %>" alt="Login" class="icon icn-svg2" />						
 							Change Password
 						</a>
-					</li>
-				</ul>			
-				<!-- User Menu -->
+					</div>	
+				</div>	
+				<form id="profileImage" action="/employee/upload-image" method="post" enctype="multipart/form-data">
+					<input id="profileImageInput" type="file" name="profileImage" />
+				</form>		
+				<script src="<%=getPath("/assets/js/side-bar.js") %>"></script>
 			</aside>
 			
 			<!-- Employee Home -->
@@ -106,6 +109,5 @@
 	<%
 	}
 	%>
-
 </body>
 </html>
