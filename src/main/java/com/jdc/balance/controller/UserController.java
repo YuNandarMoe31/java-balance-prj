@@ -51,10 +51,13 @@ public class UserController extends BaseController {
 		
 		if(null != profileImage) {
 			var profile = getLoginInfo(req).profile();
-			var imageFolder = getServletContext().getRealPath("/assets/images/profile-image");
-			var saveToPath = Path.of(imageFolder, String.format("%s.jpg", profile.getCode()));
+			var imageFolder = getServletContext().getRealPath("/assets/images/");
+			var imageFile = String.format("%s.jpg", profile.getCode());
 		
-			Files.copy(profileImage.getInputStream(), saveToPath);
+			Files.copy(profileImage.getInputStream(), Path.of(imageFolder, imageFile), StandardCopyOption.REPLACE_EXISTING);
+			
+			var user = userService().saveProfileImage(profile.getCode(), imageFile);
+			getLoginInfo(req).login(user);
 		}
 		redirect(resp, "/employee/home");
 	}

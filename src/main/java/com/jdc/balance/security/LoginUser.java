@@ -26,6 +26,13 @@ public class LoginUser implements Serializable {
 	public void logout() {
 		employee = null;
 	}
+	
+	public String getProfileImage() {
+		if(null != employee && null != employee.getProfileImage()) {
+			return employee.getProfileImage();
+		}
+		return "img_default.jpg";
+	}
 
 	public void login(Employee employee) {
 		this.employee = employee;

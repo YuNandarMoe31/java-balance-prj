@@ -57,7 +57,7 @@
 		<div class="content-container">
 			<aside>
 				<!-- Profile Image -->
-				<img class="profile-img" src="<%=getPath("/assets/images/img_profile_male.png") %>" alt="Profile Image">
+				<img class="profile-img" src="<%=getPath("/assets/images/" + loginInfo.getProfileImage()) %>" alt="Profile Image">
 				<!-- User Information -->
 				<div class="user-info">
 					<div class="user-name">
@@ -68,15 +68,15 @@
 					</div>
 					<div class="user-actions">
 						<a onclick="openUploadFile(); return false;" class="icn-txt">
-							<img src="<%=getSvg("upload") %>" alt="Login" class="icon icn-svg2" />	
+							<img src="<%=getSvg("upload") %>" alt="" class="icon icn-svg2" />	
 							Upload Photo
 						</a>
 						<a href="<%=getPath("/employee/edit-profile") %>" class="icn-txt">
-							<img src="<%=getSvg("pencil") %>" alt="Login" class="icon icn-svg2" />	
+							<img src="<%=getSvg("pencil") %>" alt="" class="icon icn-svg2" />	
 							Edit Profile
 						</a>
 						<a href="<%=getPath("/employee/change-pass") %>" class="icn-txt">
-							<img src="<%=getSvg("key") %>" alt="Login" class="icon icn-svg2" />						
+							<img src="<%=getSvg("key") %>" alt="" class="icon icn-svg2" />						
 							Change Password
 						</a>
 					</div>	
