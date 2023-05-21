@@ -1,11 +1,15 @@
 package com.jdc.balance.controller;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import com.jdc.balance.BaseController;
 import com.jdc.balance.Destination;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,8 +17,10 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet({ 
 	"/employee/home", 
 	"/employee/change-pass", 
-	"/employee/edit-profile"
+	"/employee/edit-profile",
+	"/employee/upload-image"
 })
+@MultipartConfig
 public class UserController extends BaseController {
 
 	private static final long serialVersionUID = 1L;
@@ -25,6 +31,7 @@ public class UserController extends BaseController {
 		case "/employee/home" -> loadHome(req, resp);
 		case "/employee/change-pass" -> changePassword(req, resp);
 		case "/employee/edit-profile" -> editProfile(req, resp);
+		case "/employee/upload-image" -> uploadProfileImage(req, resp);
 		}
 	}
 
@@ -36,6 +43,23 @@ public class UserController extends BaseController {
 			.pageTitle("Home")
 			.viewTitle("Dashboard")
 			.activeMenu("home").build());
+	}
+	
+	private void uploadProfileImage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// Upload Profile Image
+		var profileImage = req.getPart("profileImage");
+		
+		if(null != profileImage) {
+			var profile = getLoginInfo(req).profile();
+			var imageFolder = getServletContext().getRealPath("/assets/images/");
+			var imageFile = String.format("%s.jpg", profile.getCode());
+		
+			Files.copy(profileImage.getInputStream(), Path.of(imageFolder, imageFile), StandardCopyOption.REPLACE_EXISTING);
+			
+			var user = userService().saveProfileImage(profile.getCode(), imageFile);
+			getLoginInfo(req).login(user);
+		}
+		redirect(resp, "/employee/home");
 	}
 
 	private void changePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

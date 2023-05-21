@@ -78,6 +78,14 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 	}
 
 	@Override
+	public Employee saveProfileImage(String code, String imageFileName) {
+		var employee = findByCode(code);
+		employee.setProfileImage(imageFileName);		
+		
+		return repo.update(employee);
+	}
+
+	@Override
 	public Employee save(Employee emp) {
 		// Validation
 		// Name
@@ -168,4 +176,5 @@ public class EmployeeServiceImpl implements EmployeeService, UserService, LifeCy
 		}
 		return file;
 	}
+
 }

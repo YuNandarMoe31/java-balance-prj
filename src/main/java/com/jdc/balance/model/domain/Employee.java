@@ -18,6 +18,8 @@ public class Employee implements UserProfile, Serializable {
 	private String email;
 
 	private String password;
+	
+	private String profileImage;
 
 	private LocalDate registrationDate;
 
@@ -72,6 +74,14 @@ public class Employee implements UserProfile, Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 
 	public LocalDate getRegistrationDate() {

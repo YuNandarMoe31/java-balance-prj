@@ -57,31 +57,34 @@
 		<div class="content-container">
 			<aside>
 				<!-- Profile Image -->
-				<img class="profile-img" src="<%=getPath("/assets/images/img_profile_male.png") %>" alt="Profile Image">
+				<img class="profile-img" src="<%=getPath("/assets/images/" + loginInfo.getProfileImage()) %>" alt="Profile Image">
 				<!-- User Information -->
-				<ul class="user-info">
-					<li class="user-name">
+				<div class="user-info">
+					<div class="user-name">
 						<jsp:getProperty property="name" name="loginInfo"/>
-					</li>
-					<li class="user-role">
+					</div>
+					<div class="user-role">
 						<jsp:getProperty property="role" name="loginInfo"/>
-					</li>
-					<li class="user-actions">
-						<a href="#" class="icn-txt">
-							<img src="<%=getSvg("upload") %>" alt="Login" class="icon icn-svg2" />	
+					</div>
+					<div class="user-actions">
+						<a onclick="openUploadFile(); return false;" class="icn-txt">
+							<img src="<%=getSvg("upload") %>" alt="" class="icon icn-svg2" />	
 							Upload Photo
 						</a>
 						<a href="<%=getPath("/employee/edit-profile") %>" class="icn-txt">
-							<img src="<%=getSvg("pencil") %>" alt="Login" class="icon icn-svg2" />	
+							<img src="<%=getSvg("pencil") %>" alt="" class="icon icn-svg2" />	
 							Edit Profile
 						</a>
 						<a href="<%=getPath("/employee/change-pass") %>" class="icn-txt">
-							<img src="<%=getSvg("key") %>" alt="Login" class="icon icn-svg2" />						
+							<img src="<%=getSvg("key") %>" alt="" class="icon icn-svg2" />						
 							Change Password
 						</a>
-					</li>
-				</ul>			
-				<!-- User Menu -->
+					</div>	
+				</div>	
+				<form id="profileImageForm" action="<%=getPath("/employee/upload-image")%>" method="post" enctype="multipart/form-data">
+					<input accept="image/jpg" id="profileImageInput" onchange="uploadImage()" type="file" name="profileImage" />
+				</form>		
+				<script src="<%=getPath("/assets/js/side-bar.js") %>"></script>
 			</aside>
 			
 			<!-- Employee Home -->
@@ -106,6 +109,5 @@
 	<%
 	}
 	%>
-
 </body>
 </html>
