@@ -1,11 +1,15 @@
 package com.jdc.balance.controller;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import com.jdc.balance.BaseController;
 import com.jdc.balance.Destination;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 	"/employee/edit-profile",
 	"/employee/upload-image"
 })
+@MultipartConfig
 public class UserController extends BaseController {
 
 	private static final long serialVersionUID = 1L;
@@ -26,7 +31,7 @@ public class UserController extends BaseController {
 		case "/employee/home" -> loadHome(req, resp);
 		case "/employee/change-pass" -> changePassword(req, resp);
 		case "/employee/edit-profile" -> editProfile(req, resp);
-		case "/employee/upload-image" -> editProfile(req, resp);
+		case "/employee/upload-image" -> uploadProfileImage(req, resp);
 		}
 	}
 
@@ -42,6 +47,15 @@ public class UserController extends BaseController {
 	
 	private void uploadProfileImage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Upload Profile Image
+		var profileImage = req.getPart("profileImage");
+		
+		if(null != profileImage) {
+			var profile = getLoginInfo(req).profile();
+			var imageFolder = getServletContext().getRealPath("/assets/images/profile-image");
+			var saveToPath = Path.of(imageFolder, String.format("%s.jpg", profile.getCode()));
+		
+			Files.copy(profileImage.getInputStream(), saveToPath);
+		}
 		redirect(resp, "/employee/home");
 	}
 

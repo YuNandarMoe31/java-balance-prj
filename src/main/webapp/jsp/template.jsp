@@ -81,8 +81,8 @@
 						</a>
 					</div>	
 				</div>	
-				<form id="profileImage" action="/employee/upload-image" method="post" enctype="multipart/form-data">
-					<input id="profileImageInput" type="file" name="profileImage" />
+				<form id="profileImageForm" action="<%=getPath("/employee/upload-image")%>" method="post" enctype="multipart/form-data">
+					<input accept="image/jpg" id="profileImageInput" onchange="uploadImage()" type="file" name="profileImage" />
 				</form>		
 				<script src="<%=getPath("/assets/js/side-bar.js") %>"></script>
 			</aside>

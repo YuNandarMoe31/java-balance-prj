@@ -371,6 +371,6 @@ header>nav a.active {
 }
 
 /* Profile Image Upload */
-#profileImage {
+#profileImageForm {
 	display: none;
 }
