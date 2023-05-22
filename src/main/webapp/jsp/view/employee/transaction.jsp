@@ -23,7 +23,7 @@
 			<img src="<%=getSvg("search") %>" alt="Login" class="icon icn-svg" />
 			Search
 		</button>
-		<a href="<%=getPath("/employee/transaction/edit") %>" class="btn icn-txt">
+		<a href="<%=getPath("/employee/transaction/edit?type=" + request.getParameter("type")) %>" class="btn icn-txt">
 			<img src="<%=getSvg("plus") %>" alt="Login" class="icon icn-svg2" />
 			Add New
 		</a>
@@ -36,8 +36,8 @@
 				<th>Employee</th>
 				<th>Category</th>
 				<th>Approved</th>
-				<th>Items</th>
-				<th>Amount</th>
+				<th class="digit">Items</th>
+				<th class="digit">Amount</th>
 			</tr>
 		</thead>
 		<tbody>

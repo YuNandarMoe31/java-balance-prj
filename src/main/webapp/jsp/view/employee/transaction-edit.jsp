@@ -32,8 +32,14 @@
 	
 	<!-- Actions -->
 	<div class="actions digit">
-		<a href="#" class="btn">Add Details</a>
-		<a href="#" class="btn">Save</a>
+		<a href="#" class="btn">
+			<img src="<%=getSvg("plus") %>" alt="Login" class="icon icn-svg2" />
+			Add Details
+		</a>
+		<a href="#" class="btn">
+			<img src="<%=getSvg("checkmark") %>" alt="Login" class="icon icn-svg2" />
+			Approve
+		</a>
 	</div>
 	<!-- Details Information -->
 	<h3>Expense Details</h3>
@@ -42,9 +48,9 @@
 			<tr>
 				<th>Item</th>
 				<th>Remark</th>
-				<th>Unit Price</th>
-				<th>Quantity</th>
-				<th>Total</th>
+				<th class="digit">Unit Price</th>
+				<th class="digit">Quantity</th>
+				<th class="digit">Total</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -55,13 +61,13 @@
 				<td class="form-group">
 					<input type="text" placeholder="Enter Reason">
 				</td>
-				<td class="form-group">
+				<td class="form-group digit">
 					<input type="number" placeholder="1,000">
 				</td>
-				<td class="form-group">
+				<td class="form-group digit">
 					<input type="number" placeholder="3">
 				</td>
-				<td class="form-group">
+				<td class="form-group digit">
 					<input type="number" placeholder="35,000">
 				</td>
 			</tr>
