@@ -289,7 +289,7 @@ header>nav a.active {
 }
 
 .employee-list tbody tr:hover {
-	opacity: 0.5;
+	opacity: 0.8;
 }
 
 .employee-list th {

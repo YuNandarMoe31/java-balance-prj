@@ -1,9 +1,41 @@
-
+// Load
 document.addEventListener("DOMContentLoaded", () => {
 	setSummary("count", "allCount");
 	setSummary("total", "allTotal");
 	registerSummaryCalc();
+	registerTotalCalc();
 })
+
+// Register Total Calculation
+function registerTotalCalc() {
+	// Price
+	document.querySelectorAll('input[name="price"]')
+		.forEach(element => element.addEventListener('change', setTotalForRow));
+	
+	// Count
+	document.querySelectorAll('input[name="count"]')
+		.forEach(element => element.addEventListener('change', setTotalForRow));
+}
+
+// Set Total for Row
+function setTotalForRow() {
+	var row = this.parentElement.parentElement;
+	var price = getInput(row, "price").value;
+	var count = getInput(row, "count").value;
+	
+	if(count == 0) {
+		row.parentElement.removeChild(row);
+	} else {
+		getInput(row, "total").value = price * count;
+		setSummary("total", "allTotal");
+	}
+
+}
+
+// Get Input
+function getInput(row, name) {
+	return row.querySelector(`input[name="${name}"]`);
+}
 
 // Register Summary Calculation
 function registerSummaryCalc() {
@@ -54,6 +86,7 @@ function addDetails() {
 	
 	// Set Registration for New Row
 	registerSummaryCalc();
+	registerTotalCalc();
 }
 
 // Append Text Cell
