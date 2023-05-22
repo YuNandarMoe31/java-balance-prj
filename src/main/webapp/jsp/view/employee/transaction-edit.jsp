@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page extends="com.jdc.balance.BaseView" %>
+<script src="<%=getPath("/assets/js/transaction-edit.js") %>"></script>
+
 <!-- Header Inform -->
 <div class="list-content transaction-page">
 	<div class="transaction-list">
@@ -32,7 +34,7 @@
 	
 	<!-- Actions -->
 	<div class="actions digit">
-		<a href="#" class="btn">
+		<a href="#" onclick="addDetails(); return false;" class="btn">
 			<img src="<%=getSvg("plus") %>" alt="Login" class="icon icn-svg2" />
 			Add Details
 		</a>
@@ -53,7 +55,7 @@
 				<th class="digit">Total</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="detailsWrapper">
 			<tr>
 				<td class="form-group">
 					<input type="text" placeholder="Enter Item Name">
@@ -61,14 +63,14 @@
 				<td class="form-group">
 					<input type="text" placeholder="Enter Reason">
 				</td>
-				<td class="form-group digit">
-					<input type="number" placeholder="1,000">
+				<td class="form-group">
+					<input type="number" placeholder="">
 				</td>
-				<td class="form-group digit">
-					<input type="number" placeholder="3">
+				<td class="form-group">
+					<input type="number" placeholder="">
 				</td>
-				<td class="form-group digit">
-					<input type="number" placeholder="35,000">
+				<td class="form-group">
+					<input type="number" placeholder="">
 				</td>
 			</tr>
 		</tbody>

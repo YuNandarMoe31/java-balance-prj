@@ -374,3 +374,8 @@ header>nav a.active {
 #profileImageForm {
 	display: none;
 }
+
+input[type="number"] {
+	text-align: right;
+	float: right;
+}
