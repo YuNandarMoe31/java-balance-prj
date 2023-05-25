@@ -16,28 +16,29 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet({
-	"/employee/transaction/search",
-	"/employee/transaction/details",
+@WebServlet({ 
+	"/employee/transaction/search", 
+	"/employee/transaction/details", 
 	"/employee/transaction/edit",
-	"/manager/transaction/approve"
+	"/manager/transaction/approve" 
 })
 public class TranscationController extends BaseController {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final String LIST_VIEW = "employee/transaction";
 	private static final String DETAILS_VIEW = "employee/transaction-details";
 	private static final String EDIT_VIEW = "employee/transaction-edit";
-	
+
 	private static final String SEARCH_ACTION = "/employee/transaction/search";
 	private static final String DETAILS_ACTION = "/employee/transaction/details";
 	private static final String EDIT_ACTION = "/employee/transaction/edit";
-	private static final String APPROVE_ACTION = "/employee/transaction/approve";
+	private static final String APPROVE_ACTION = "/manager/transaction/approve";
 
 	@Override
-	protected void process(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
-		switch(path) {
+	protected void process(HttpServletRequest req, HttpServletResponse resp, String path)
+			throws ServletException, IOException {
+		switch (path) {
 		case SEARCH_ACTION -> search(req, resp);
 		case DETAILS_ACTION -> showDetails(req, resp);
 		case EDIT_ACTION -> edit(req, resp);
@@ -47,52 +48,48 @@ public class TranscationController extends BaseController {
 
 	private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Transaction Search Action
-		navigate(destinationBuilder(LIST_VIEW, "Income".equals(req.getParameter("type")))
-				.req(req).resp(resp)
-				.build());
+		navigate(destinationBuilder(LIST_VIEW, "Income".equals(req.getParameter("type"))).req(req).resp(resp).build());
 	}
 
 	private void showDetails(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Transaction Details Action
 		var idParam = req.getParameter("id");
 		var data = transactionService().findById(Integer.parseInt(idParam));
-		
+
 		req.setAttribute("data", data);
-				
-		navigate(destinationBuilder(DETAILS_VIEW, Type.Income.equals(data.getType()))
-				.req(req).resp(resp)
-				.build());
+
+		navigate(destinationBuilder(DETAILS_VIEW, Type.Income.equals(data.getType())).req(req).resp(resp).build());
 	}
 
 	private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Transaction data = new Transaction();
 		var idParam = req.getParameter("id");
-		
-		if(null != idParam) {
+
+		if (null != idParam) {
 			data = transactionService().findById(Integer.parseInt(idParam));
 		}
-		
-		if(isPostRequest(req)) {
-			// Transaction Save Action			
+
+		if (isPostRequest(req)) {
+			// Transaction Save Action
 			data.setCategory(req.getParameter("category"));
 			data.setType(Type.valueOf(req.getParameter("type")));
 			data.setDate(DateUtils.stringToDate(req.getParameter("date")));
-			
+
 			String code = req.getParameter("employeeCode");
-			if(StringUtils.isEmpty(code)) {
+			if (StringUtils.isEmpty(code)) {
 				code = getLoginInfo(req).profile().getCode();
 			}
-			
+
 			data.setEmployee(employeeService().findByCode(code));
 			data.setApproved(Boolean.parseBoolean(req.getParameter("approved")));
-			
+
 			var items = req.getParameterValues("item");
 			var remarks = req.getParameterValues("remark");
 			var prices = req.getParameterValues("price");
 			var counts = req.getParameterValues("count");
-			
+
 			var details = new ArrayList<TransactionClass>();
-			for(var i = 0; i < items.length; i++) {
+			for (var i = 0; i < items.length; i++) {
 				var item = new TransactionClass();
 				item.setItem(items[i]);
 				item.setRemark(remarks[i]);
@@ -101,28 +98,29 @@ public class TranscationController extends BaseController {
 				details.add(item);
 			}
 			data.setDetails(details);
-			
+
 			data = transactionService().save(data);
-	
+
 			redirect(resp, "/employee/transaction/details?id=" + data.getId());
 		} else {
 			// TODO Transaction Edit Action
-			navigate(destinationBuilder(EDIT_VIEW, "Income".equals(req.getParameter("type")))
-					.req(req).resp(resp)
+			navigate(destinationBuilder(EDIT_VIEW, "Income".equals(req.getParameter("type"))).req(req).resp(resp)
 					.build());
 		}
 	}
 
 	private void approve(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		// TODO Transaction Approve Action
-		redirect(resp, "employee/transaction/search");
+		// Transaction Approve Action
+		var idParam = req.getParameter("id");
+		transactionService().approve(Integer.parseInt(idParam));
+
+		redirect(resp, String.format("/employee/transaction/details?id=%s", idParam));
 	}
-	
+
 	private Destination.Builder destinationBuilder(String view, boolean income) {
-		Destination.Builder builder = new Destination.Builder()
-				.view(view);			
-			
-		if(income) {
+		Destination.Builder builder = new Destination.Builder().view(view);
+
+		if (income) {
 			builder.pageTitle("Incomes").viewTitle("Daily Incomes").activeMenu("incomes");
 		} else {
 			builder.pageTitle("Expenses").viewTitle("Daily Expenses").activeMenu("expenses");

@@ -40,14 +40,14 @@
 				(!loginInfo.isManager()) 
 				&& !data.isApproved()
 				&& data.ownTransaction(loginInfo.profile().getCode())) { %>
-			<a href="#" class="btn">
+			<a href="<%= getPath("/employee/transaction/edit?id" + data.getId() + "&type=" + data.getType().name()) %>" class="btn">
 				<img src="<%=getSvg("pencil") %>" alt="Login" class="icon icn-svg2" />		
 				Edit
 			</a>
 		<% } %>
 		
 		<% if(loginInfo.isManager() && !data.isApproved()) { %>
-			<a href="#" class="btn">
+			<a href="<%= getPath("/manager/transaction/approve?id=" + data.getId()) %>" class="btn">
 				<img src="<%=getSvg("checkmark") %>" alt="Login" class="icon icn-svg2" />
 				Approve
 			</a>

@@ -95,8 +95,7 @@ public class TransactionServiceImpl implements TransactionService, LifeCycle {
 	public void approve(int id) {
 		var data = repo.findById(id);
 		data.setApproved(true);
-		repo.update(data);
-		
+		repo.update(data);		
 	}
 
 	@Override
