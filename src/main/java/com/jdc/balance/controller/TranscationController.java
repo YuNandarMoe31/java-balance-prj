@@ -1,9 +1,15 @@
 package com.jdc.balance.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.jdc.balance.BaseController;
 import com.jdc.balance.Destination;
+import com.jdc.balance.model.domain.Transaction;
+import com.jdc.balance.model.domain.Transaction.Type;
+import com.jdc.balance.model.domain.TransactionClass;
+import com.jdc.balance.utils.DateUtils;
+import com.jdc.balance.utils.StringUtils;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -47,17 +53,58 @@ public class TranscationController extends BaseController {
 	}
 
 	private void showDetails(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Transaction Details Action
-		navigate(destinationBuilder(DETAILS_VIEW, "Income".equals(req.getParameter("type")))
+		// Transaction Details Action
+		var idParam = req.getParameter("id");
+		var data = transactionService().findById(Integer.parseInt(idParam));
+		
+		req.setAttribute("data", data);
+				
+		navigate(destinationBuilder(DETAILS_VIEW, Type.Income.equals(data.getType()))
 				.req(req).resp(resp)
 				.build());
 	}
 
 	private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Transaction data = new Transaction();
+		var idParam = req.getParameter("id");
+		
+		if(null != idParam) {
+			data = transactionService().findById(Integer.parseInt(idParam));
+		}
+		
 		if(isPostRequest(req)) {
-			// TODO Transaction Save Action
+			// Transaction Save Action			
+			data.setCategory(req.getParameter("category"));
+			data.setType(Type.valueOf(req.getParameter("type")));
+			data.setDate(DateUtils.stringToDate(req.getParameter("date")));
 			
-			redirect(resp, "employee/transaction/details?id=");
+			String code = req.getParameter("employeeCode");
+			if(StringUtils.isEmpty(code)) {
+				code = getLoginInfo(req).profile().getCode();
+			}
+			
+			data.setEmployee(employeeService().findByCode(code));
+			data.setApproved(Boolean.parseBoolean(req.getParameter("approved")));
+			
+			var items = req.getParameterValues("item");
+			var remarks = req.getParameterValues("remark");
+			var prices = req.getParameterValues("price");
+			var counts = req.getParameterValues("count");
+			
+			var details = new ArrayList<TransactionClass>();
+			for(var i = 0; i < items.length; i++) {
+				var item = new TransactionClass();
+				item.setItem(items[i]);
+				item.setRemark(remarks[i]);
+				item.setPrice(Integer.parseInt(prices[i]));
+				item.setQuantity(Integer.parseInt(counts[i]));
+				details.add(item);
+			}
+			data.setDetails(details);
+			
+			data = transactionService().save(data);
+	
+			redirect(resp, "/employee/transaction/details?id=" + data.getId());
 		} else {
 			// TODO Transaction Edit Action
 			navigate(destinationBuilder(EDIT_VIEW, "Income".equals(req.getParameter("type")))

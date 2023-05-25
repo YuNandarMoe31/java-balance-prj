@@ -1,29 +1,31 @@
+<%@page import="com.jdc.balance.model.domain.TransactionClass"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page extends="com.jdc.balance.BaseView" %>
+<jsp:useBean id="data" scope="request" type="com.jdc.balance.model.domain.Transaction" />
 <!-- Header Inform -->
 <div class="list-content">
 	<div class="transaction-list">
 		<div class="form-group">
 			<label>Date</label> 
-			<input type="text" disabled="disabled" value="202108-001">
-		</div>
-		<div class="form-group">
-			<label>Category</label> 
-			<input type="text" disabled="disabled" value="Stationary">
-		</div>	
-		<div class="form-group">
-			<label>Items</label> 
-			<input type="text" disabled="disabled" value="3" class="digit">
+			<input type="text" disabled="disabled" value="<%=getDateString(data.getDate()) %>">
 		</div>
 		<div class="form-group">
 			<label>Employee</label> 
-			<input type="text" disabled="disabled" value="Thidar">
+			<input type="text" disabled="disabled" value="<%= data.getEmployee().getName() %>">
 		</div>
+		<div class="form-group">
+			<label>Category</label> 
+			<input type="text" disabled="disabled" value="<%=data.getCategory() %>">
+		</div>	
 		<div class="form-group">
 			<label>Status</label> 
 			<input type="text" disabled="disabled" value="Not Approve">
 		</div>
+		<div class="form-group">
+			<label>Items</label> 
+			<input type="text" disabled="disabled" value="3" class="digit">
+		</div>		
 		<div class="form-group">
 			<label>Total</label> 
 			<input type="text" disabled="disabled" value="35,000" class="digit">
@@ -41,22 +43,23 @@
 		<thead>
 			<tr>
 				<th>Item</th>
-				<th>Unit Price</th>
-				<th>Quantity</th>
-				<th>Total</th>
 				<th>Remark</th>
+				<th class="digit">Unit Price</th>
+				<th class="digit">Quantity</th>
+				<th class="digit">Total</th>				
 			</tr>
 		</thead>
 		<tbody>
 			<%
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < data.getDetails().size(); i++) {
+				TransactionClass details = data.getDetails().get(i);
 			%>
 			<tr>
-				<td>Printing Paper</td>
+				<td><%= details.getItem() %></td>
+				<td><%= details.getRemark() %></td>
 				<td class="digit">2,800</td>
 				<td class="digit">3</td>
-				<td class="digit">8,400</td>
-				<td>Some Remark Message</td>
+				<td class="digit">8,400</td>				
 			</tr>
 			<%
 			}

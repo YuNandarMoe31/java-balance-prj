@@ -1,7 +1,7 @@
 package com.jdc.balance.model.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Transaction implements Serializable {
@@ -18,7 +18,7 @@ public class Transaction implements Serializable {
 
 	private List<TransactionClass> details;
 
-	private Date date;
+	private LocalDate date;
 
 	private Type type;
 
@@ -66,11 +66,11 @@ public class Transaction implements Serializable {
 		this.details = details;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -81,5 +81,5 @@ public class Transaction implements Serializable {
 	public void setType(Type type) {
 		this.type = type;
 	}
-
+	
 }

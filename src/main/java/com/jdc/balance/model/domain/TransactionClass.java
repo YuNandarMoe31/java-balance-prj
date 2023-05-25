@@ -14,8 +14,6 @@ public class TransactionClass implements Serializable{
 
 	private int quantity;
 
-	private int total;
-
 	public String getItem() {
 		return item;
 	}
@@ -47,13 +45,4 @@ public class TransactionClass implements Serializable{
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	public int getTotal() {
-		return total;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
 }

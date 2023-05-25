@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -30,7 +30,7 @@ public class TransactionServiceImpl implements TransactionService, LifeCycle {
 	}
 
 	@Override
-	public List<Transaction> search(Type type, Date from, Date to, String category) {
+	public List<Transaction> search(Type type, LocalDate from, LocalDate to, String category) {
 		Predicate<Transaction> filter = data -> true;
 		
 		if(null != type) {
