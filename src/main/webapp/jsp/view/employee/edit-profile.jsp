@@ -18,7 +18,7 @@
 		<input type="email" name="email" value="<%= loginInfo.profile().getEmail() %>" placeholder="Enter Your Email">
 		
 		<label>Phone Number</label> 
-		<input type="number" name="phone" value="<%= loginInfo.profile().getPhone() %>" placeholder="Enter Your Phone Number">
+		<input type="text" name="phone" value="<%= loginInfo.profile().getPhone() %>" placeholder="Enter Your Phone Number">
 
 		<button type="submit" class="icn-txt">
 			<img src="<%=getSvg("floppy-disk") %>" alt="Login" class="icon icn-svg" />

@@ -27,7 +27,7 @@
 		<input type="email" name="email" placeholder="Enter Your Email" value="<%= getProperty(employee.getEmail()) %>">
 		
 		<label>Phone Number</label> 
-		<input type="number" name="phone" placeholder="Enter Your Phone Number" value="<%= getProperty(employee.getPhone()) %>">
+		<input type="text" name="phone" placeholder="Enter Your Phone Number" value="<%= getProperty(employee.getPhone()) %>">
 		
 		<div class="row">
 			<div class="form-group">

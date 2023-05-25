@@ -3,6 +3,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page extends="com.jdc.balance.BaseView" %>
 <jsp:useBean id="data" scope="request" type="com.jdc.balance.model.domain.Transaction" />
+<jsp:useBean id="loginInfo" class="com.jdc.balance.security.LoginUser"
+		scope="session" />
 <!-- Header Inform -->
 <div class="list-content">
 	<div class="transaction-list">
@@ -16,26 +18,40 @@
 		</div>
 		<div class="form-group">
 			<label>Category</label> 
-			<input type="text" disabled="disabled" value="<%=data.getCategory() %>">
+			<input type="text" disabled="disabled" value="<%= data.getCategory() %>">
 		</div>	
 		<div class="form-group">
 			<label>Status</label> 
-			<input type="text" disabled="disabled" value="Not Approve">
+			<input type="text" disabled="disabled" value="<%= data.isApproved() ? "Approved" : "Not Approved" %>">
 		</div>
 		<div class="form-group">
 			<label>Items</label> 
-			<input type="text" disabled="disabled" value="3" class="digit">
+			<input type="text" disabled="disabled" value="<%= data.getItems() %>" class="digit">
 		</div>		
 		<div class="form-group">
 			<label>Total</label> 
-			<input type="text" disabled="disabled" value="35,000" class="digit">
+			<input type="text" disabled="disabled" value="<%= formatNumber(data.getTotal()) %> MMK" class="digit">
 		</div>
 	</div>
 	
 	<!-- Actions -->
 	<div class="actions digit">
-		<a href="#" class="btn">Edit</a>
-		<a href="#" class="btn">Approve</a>
+		<% if(loginInfo.isManager() || 
+				(!loginInfo.isManager()) 
+				&& !data.isApproved()
+				&& data.ownTransaction(loginInfo.profile().getCode())) { %>
+			<a href="#" class="btn">
+				<img src="<%=getSvg("pencil") %>" alt="Login" class="icon icn-svg2" />		
+				Edit
+			</a>
+		<% } %>
+		
+		<% if(loginInfo.isManager() && !data.isApproved()) { %>
+			<a href="#" class="btn">
+				<img src="<%=getSvg("checkmark") %>" alt="Login" class="icon icn-svg2" />
+				Approve
+			</a>
+		<% } %>
 	</div>
 	<!-- Details Information -->
 	<h3>Expense Details</h3>
@@ -57,9 +73,9 @@
 			<tr>
 				<td><%= details.getItem() %></td>
 				<td><%= details.getRemark() %></td>
-				<td class="digit">2,800</td>
-				<td class="digit">3</td>
-				<td class="digit">8,400</td>				
+				<td class="digit"><%= formatNumber(details.getPrice()) %> MMK</td>
+				<td class="digit"><%= formatNumber(details.getQuantity()) %></td>
+				<td class="digit"><%= formatNumber(details.getTotal()) %> MMK</td>				
 			</tr>
 			<%
 			}

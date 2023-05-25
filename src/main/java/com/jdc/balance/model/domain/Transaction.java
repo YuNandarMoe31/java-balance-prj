@@ -15,12 +15,27 @@ public class Transaction implements Serializable {
 	private boolean approved;
 
 	private Employee employee;
-
-	private List<TransactionClass> details;
-
+	
 	private LocalDate date;
 
 	private Type type;
+
+	private List<TransactionClass> details;
+
+	public int getItems() {
+		return null == details ? 0 : details.stream().mapToInt(a -> a.getQuantity()).sum();
+	}
+	
+	public int getTotal() {
+		return null == details ? 0 : details.stream().mapToInt(a -> a.getTotal()).sum();
+	}
+	
+	public boolean ownTransaction(String code) {
+		if(null != employee) {
+			return employee.getCode().equals(code);
+		}
+		return false;
+	}
 
 	public enum Type {
 		Income, Expense
@@ -81,5 +96,7 @@ public class Transaction implements Serializable {
 	public void setType(Type type) {
 		this.type = type;
 	}
+	
+	
 	
 }
