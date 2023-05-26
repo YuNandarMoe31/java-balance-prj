@@ -8,7 +8,7 @@ import com.jdc.balance.model.domain.Transaction.Type;
 
 public interface TransactionService {
 
-	public List<Transaction> search(Type type, LocalDate from, LocalDate to, String category);
+	public List<Transaction> search(String code, Type type, LocalDate from, LocalDate to, String category);
 
 	public Transaction findById(int id);
 

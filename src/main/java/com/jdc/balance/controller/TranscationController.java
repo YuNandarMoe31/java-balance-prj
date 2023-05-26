@@ -49,8 +49,33 @@ public class TranscationController extends BaseController {
 	}
 
 	private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Transaction Search Action
-		navigate(destinationBuilder(LIST_VIEW, "Income".equals(req.getParameter("type"))).req(req).resp(resp).build());
+		// Transaction Search Action
+		
+		// Employee Code from Session
+		var code = getLoginInfo(req).isManager() ? null : getLoginInfo(req).profile().getCode();
+		
+		// Get Request Parameters
+		var type = Type.valueOf(req.getParameter("type"));
+		var from = DateUtils.stringToDate(req.getParameter("from"));
+		
+		if(null == from) {
+			from = LocalDate.now().withDayOfMonth(1);
+		}
+		
+		var to = DateUtils.stringToDate(req.getParameter("to"));
+		var category = req.getParameter("category");
+		
+		// Search
+		var list = transactionService().search(code, type, from, to, category);
+		req.setAttribute("list", list);
+		req.setAttribute("type", type);
+		req.setAttribute("from", from);
+		req.setAttribute("to", to);
+		req.setAttribute("category", category);		
+		
+		navigate(destinationBuilder(LIST_VIEW, "Income".equals(req.getParameter("type")))
+				.req(req).resp(resp)
+				.build());
 	}
 
 	private void showDetails(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

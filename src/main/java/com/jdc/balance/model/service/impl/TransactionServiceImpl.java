@@ -17,6 +17,7 @@ import com.jdc.balance.model.repo.TransactionRepo;
 import com.jdc.balance.model.repo.impl.TransactionRepoImpl;
 import com.jdc.balance.model.service.BalanceBusinessException;
 import com.jdc.balance.model.service.TransactionService;
+import com.jdc.balance.utils.StringUtils;
 
 public class TransactionServiceImpl implements TransactionService, LifeCycle {
 
@@ -30,8 +31,12 @@ public class TransactionServiceImpl implements TransactionService, LifeCycle {
 	}
 
 	@Override
-	public List<Transaction> search(Type type, LocalDate from, LocalDate to, String category) {
+	public List<Transaction> search(String code, Type type, LocalDate from, LocalDate to, String category) {
 		Predicate<Transaction> filter = data -> true;
+		
+		if(!StringUtils.isEmpty(code)) {
+			filter = filter.and(data -> data.getEmployee().getCode().equals(code));
+		}
 		
 		if(null != type) {
 			filter = filter.and(data -> data.getType() == type);
