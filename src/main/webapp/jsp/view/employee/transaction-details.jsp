@@ -40,7 +40,7 @@
 				(!loginInfo.isManager()) 
 				&& !data.isApproved()
 				&& data.ownTransaction(loginInfo.profile().getCode())) { %>
-			<a href="<%= getPath("/employee/transaction/edit?id" + data.getId() + "&type=" + data.getType().name()) %>" class="btn">
+			<a href="<%= getPath("/employee/transaction/edit?id=" + data.getId() + "&type=" + data.getType().name()) %>" class="btn">
 				<img src="<%=getSvg("pencil") %>" alt="Login" class="icon icn-svg2" />		
 				Edit
 			</a>

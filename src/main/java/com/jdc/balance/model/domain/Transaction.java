@@ -2,6 +2,7 @@ package com.jdc.balance.model.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Transaction implements Serializable {
@@ -21,6 +22,10 @@ public class Transaction implements Serializable {
 	private Type type;
 
 	private List<TransactionClass> details;
+	
+	public Transaction() {
+		details = new ArrayList<>();
+	}
 
 	public int getItems() {
 		return null == details ? 0 : details.stream().mapToInt(a -> a.getQuantity()).sum();

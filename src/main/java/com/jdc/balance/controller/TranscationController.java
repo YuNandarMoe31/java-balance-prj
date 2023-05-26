@@ -1,10 +1,12 @@
 package com.jdc.balance.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.jdc.balance.BaseController;
 import com.jdc.balance.Destination;
+import com.jdc.balance.model.domain.Employee.Role;
 import com.jdc.balance.model.domain.Transaction;
 import com.jdc.balance.model.domain.Transaction.Type;
 import com.jdc.balance.model.domain.TransactionClass;
@@ -65,11 +67,32 @@ public class TranscationController extends BaseController {
 		Transaction data = new Transaction();
 		var idParam = req.getParameter("id");
 
-		if (null != idParam) {
+		if (null != idParam && !"0".equals(idParam)) {
 			data = transactionService().findById(Integer.parseInt(idParam));
 		}
-
-		if (isPostRequest(req)) {
+		
+		if (!isPostRequest(req)) {			
+			// Transaction Edit Action
+			if(null == idParam) {
+				data.setType(Type.valueOf(req.getParameter("type")));		
+				
+				var code = getLoginInfo(req).profile().getCode();
+				data.setEmployee(employeeService().findByCode(code));
+				
+				data.setDate(LocalDate.now());
+				
+				var details = new TransactionClass();
+				details.setQuantity(1);
+				
+				data.getDetails().add(details);
+			}
+			
+			req.setAttribute("data", data);
+			
+			navigate(destinationBuilder(EDIT_VIEW, Type.Income.equals(data.getType()))
+					.req(req).resp(resp)
+					.build());
+		} else {
 			// Transaction Save Action
 			data.setCategory(req.getParameter("category"));
 			data.setType(Type.valueOf(req.getParameter("type")));
@@ -77,12 +100,15 @@ public class TranscationController extends BaseController {
 
 			String code = req.getParameter("employeeCode");
 			if (StringUtils.isEmpty(code)) {
-				code = getLoginInfo(req).profile().getCode();
+				code = getLoginInfo(req).profile().getCode();			
 			}
 
 			data.setEmployee(employeeService().findByCode(code));
-			data.setApproved(Boolean.parseBoolean(req.getParameter("approved")));
-
+			
+			if(Role.Manager.equals(data.getEmployee().getRole())) {
+				data.setApproved(true);
+			}			
+			
 			var items = req.getParameterValues("item");
 			var remarks = req.getParameterValues("remark");
 			var prices = req.getParameterValues("price");
@@ -101,11 +127,7 @@ public class TranscationController extends BaseController {
 
 			data = transactionService().save(data);
 
-			redirect(resp, "/employee/transaction/details?id=" + data.getId());
-		} else {
-			// TODO Transaction Edit Action
-			navigate(destinationBuilder(EDIT_VIEW, "Income".equals(req.getParameter("type"))).req(req).resp(resp)
-					.build());
+			redirect(resp, "/employee/transaction/details?id=" + data.getId());		
 		}
 	}
 
