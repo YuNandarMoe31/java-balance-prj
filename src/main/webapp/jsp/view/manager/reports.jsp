@@ -29,9 +29,9 @@
 				<th>Date</th>
 				<th>Category</th>
 				<th>Employee</th>
-				<th>Income</th>
-				<th>Expense</th>
-				<th>Balance</th>
+				<th class="digit">Income</th>
+				<th class="digit">Expense</th>
+				<th class="digit">Balance</th>
 			</tr>
 		</thead>
 		<tbody>

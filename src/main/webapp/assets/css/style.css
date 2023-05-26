@@ -289,7 +289,7 @@ header>nav a.active {
 }
 
 .employee-list tbody tr:hover {
-	opacity: 0.5;
+	opacity: 0.8;
 }
 
 .employee-list th {
@@ -373,4 +373,9 @@ header>nav a.active {
 /* Profile Image Upload */
 #profileImageForm {
 	display: none;
+}
+
+input[type="number"] {
+	text-align: right;
+	float: right;
 }

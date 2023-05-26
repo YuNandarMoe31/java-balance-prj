@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.apache.jasper.runtime.HttpJspBase;
 
 import com.jdc.balance.utils.DateUtils;
+import com.jdc.balance.utils.StringUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -38,5 +39,9 @@ public abstract class BaseView extends HttpJspBase {
 	
 	protected String getProperty(String value) {
 		return null == value ? "" : value;
+	}
+	
+	protected String formatNumber(int data) {
+		return StringUtils.formatNumber(data);
 	}
 }

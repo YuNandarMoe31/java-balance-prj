@@ -1,7 +1,8 @@
 package com.jdc.balance.model.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Transaction implements Serializable {
@@ -15,12 +16,31 @@ public class Transaction implements Serializable {
 	private boolean approved;
 
 	private Employee employee;
-
-	private List<TransactionClass> details;
-
-	private Date date;
+	
+	private LocalDate date;
 
 	private Type type;
+
+	private List<TransactionClass> details;
+	
+	public Transaction() {
+		details = new ArrayList<>();
+	}
+
+	public int getItems() {
+		return null == details ? 0 : details.stream().mapToInt(a -> a.getQuantity()).sum();
+	}
+	
+	public int getTotal() {
+		return null == details ? 0 : details.stream().mapToInt(a -> a.getTotal()).sum();
+	}
+	
+	public boolean ownTransaction(String code) {
+		if(null != employee) {
+			return employee.getCode().equals(code);
+		}
+		return false;
+	}
 
 	public enum Type {
 		Income, Expense
@@ -66,11 +86,11 @@ public class Transaction implements Serializable {
 		this.details = details;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -81,5 +101,7 @@ public class Transaction implements Serializable {
 	public void setType(Type type) {
 		this.type = type;
 	}
-
+	
+	
+	
 }
