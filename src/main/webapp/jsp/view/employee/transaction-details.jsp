@@ -1,4 +1,4 @@
-<%@page import="com.jdc.balance.model.domain.TransactionClass"%>
+<%@page import="com.jdc.balance.model.domain.TransactionDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page extends="com.jdc.balance.BaseView" %>
@@ -10,48 +10,56 @@
 	<div class="transaction-list">
 		<div class="form-group">
 			<label>Date</label> 
-			<input type="text" disabled="disabled" value="<%=getDateString(data.getDate()) %>">
+			<input type="text" disabled="disabled" value="<%=getDateString(data.getDate())%>">
 		</div>
 		<div class="form-group">
 			<label>Employee</label> 
-			<input type="text" disabled="disabled" value="<%= data.getEmployee().getName() %>">
+			<input type="text" disabled="disabled" value="<%=data.getEmployee().getName()%>">
 		</div>
 		<div class="form-group">
 			<label>Category</label> 
-			<input type="text" disabled="disabled" value="<%= data.getCategory() %>">
+			<input type="text" disabled="disabled" value="<%=data.getCategory()%>">
 		</div>	
 		<div class="form-group">
 			<label>Status</label> 
-			<input type="text" disabled="disabled" value="<%= data.isApproved() ? "Approved" : "Not Approved" %>">
+			<input type="text" disabled="disabled" value="<%=data.isApproved() ? "Approved" : "Not Approved"%>">
 		</div>
 		<div class="form-group">
 			<label>Items</label> 
-			<input type="text" disabled="disabled" value="<%= data.getItems() %>" class="digit">
+			<input type="text" disabled="disabled" value="<%=data.getItems()%>" class="digit">
 		</div>		
 		<div class="form-group">
 			<label>Total</label> 
-			<input type="text" disabled="disabled" value="<%= formatNumber(data.getTotal()) %> MMK" class="digit">
+			<input type="text" disabled="disabled" value="<%=formatNumber(data.getTotal())%> MMK" class="digit">
 		</div>
 	</div>
 	
 	<!-- Actions -->
 	<div class="actions digit">
-		<% if(loginInfo.isManager() || 
+		<%
+		if(loginInfo.isManager() || 
 				(!loginInfo.isManager()) 
 				&& !data.isApproved()
-				&& data.ownTransaction(loginInfo.profile().getCode())) { %>
-			<a href="<%= getPath("/employee/transaction/edit?id=" + data.getId() + "&type=" + data.getType().name()) %>" class="btn">
-				<img src="<%=getSvg("pencil") %>" alt="Login" class="icon icn-svg2" />		
+				&& data.ownTransaction(loginInfo.profile().getCode())) {
+		%>
+			<a href="<%=getPath("/employee/transaction/edit?id=" + data.getId() + "&type=" + data.getType().name())%>" class="btn">
+				<img src="<%=getSvg("pencil")%>" alt="Login" class="icon icn-svg2" />		
 				Edit
 			</a>
-		<% } %>
+		<%
+		}
+		%>
 		
-		<% if(loginInfo.isManager() && !data.isApproved()) { %>
-			<a href="<%= getPath("/manager/transaction/approve?id=" + data.getId()) %>" class="btn">
-				<img src="<%=getSvg("checkmark") %>" alt="Login" class="icon icn-svg2" />
+		<%
+				if(loginInfo.isManager() && !data.isApproved()) {
+				%>
+			<a href="<%=getPath("/manager/transaction/approve?id=" + data.getId())%>" class="btn">
+				<img src="<%=getSvg("checkmark")%>" alt="Login" class="icon icn-svg2" />
 				Approve
 			</a>
-		<% } %>
+		<%
+		}
+		%>
 	</div>
 	<!-- Details Information -->
 	<h3>Expense Details</h3>
@@ -68,7 +76,7 @@
 		<tbody>
 			<%
 			for (int i = 0; i < data.getDetails().size(); i++) {
-				TransactionClass details = data.getDetails().get(i);
+					TransactionDetails details = data.getDetails().get(i);
 			%>
 			<tr>
 				<td><%= details.getItem() %></td>

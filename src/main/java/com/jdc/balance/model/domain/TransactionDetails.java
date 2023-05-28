@@ -2,7 +2,7 @@ package com.jdc.balance.model.domain;
 
 import java.io.Serializable;
 
-public class TransactionClass implements Serializable{
+public class TransactionDetails implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
