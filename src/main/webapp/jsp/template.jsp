@@ -30,13 +30,13 @@
 					<img src="<%=getSvg("home") %>" alt="Login" class="icon icn-svg" />
 					Home
 				</a>
-				<a href="<%=getPath("/employee/transaction/search?type=Income") %>" class='<%=getActiveClass(request, "incomes") %>'>
-					<img src="<%=getSvg("folder-plus") %>" alt="Login" class="icon icn-svg" />
-					Incomes
-				</a>
 				<a href="<%=getPath("/employee/transaction/search?type=Expense") %>" class='<%=getActiveClass(request, "expenses") %>'>
 					<img src="<%=getSvg("folder-minus") %>" alt="Login" class="icon icn-svg" />
 					Expenses
+				</a>
+				<a href="<%=getPath("/employee/transaction/search?type=Income") %>" class='<%=getActiveClass(request, "incomes") %>'>
+					<img src="<%=getSvg("folder-plus") %>" alt="Login" class="icon icn-svg" />
+					Incomes
 				</a>
 				<% if(loginInfo.isManager()) { %>
 					<a href="<%=getPath("/manager/balance") %>" class='<%=getActiveClass(request, "reports") %>'>

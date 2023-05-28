@@ -21,7 +21,7 @@ public class Transaction implements Serializable {
 
 	private Type type;
 
-	private List<TransactionClass> details;
+	private List<TransactionDetails> details;
 	
 	public Transaction() {
 		details = new ArrayList<>();
@@ -78,11 +78,11 @@ public class Transaction implements Serializable {
 		this.employee = employee;
 	}
 
-	public List<TransactionClass> getDetails() {
+	public List<TransactionDetails> getDetails() {
 		return details;
 	}
 
-	public void setDetails(List<TransactionClass> details) {
+	public void setDetails(List<TransactionDetails> details) {
 		this.details = details;
 	}
 

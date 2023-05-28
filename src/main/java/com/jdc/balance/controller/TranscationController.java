@@ -9,7 +9,7 @@ import com.jdc.balance.Destination;
 import com.jdc.balance.model.domain.Employee.Role;
 import com.jdc.balance.model.domain.Transaction;
 import com.jdc.balance.model.domain.Transaction.Type;
-import com.jdc.balance.model.domain.TransactionClass;
+import com.jdc.balance.model.domain.TransactionDetails;
 import com.jdc.balance.utils.DateUtils;
 import com.jdc.balance.utils.StringUtils;
 
@@ -106,7 +106,7 @@ public class TranscationController extends BaseController {
 				
 				data.setDate(LocalDate.now());
 				
-				var details = new TransactionClass();
+				var details = new TransactionDetails();
 				details.setQuantity(1);
 				
 				data.getDetails().add(details);
@@ -139,9 +139,9 @@ public class TranscationController extends BaseController {
 			var prices = req.getParameterValues("price");
 			var counts = req.getParameterValues("count");
 
-			var details = new ArrayList<TransactionClass>();
+			var details = new ArrayList<TransactionDetails>();
 			for (var i = 0; i < items.length; i++) {
-				var item = new TransactionClass();
+				var item = new TransactionDetails();
 				item.setItem(items[i]);
 				item.setRemark(remarks[i]);
 				item.setPrice(Integer.parseInt(prices[i]));
